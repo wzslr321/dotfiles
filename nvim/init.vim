@@ -44,3 +44,5 @@ set expandtab
 
 source $HOME/.config/nvim/themes/airline.vim
 source $HOME/.config/nvim/themes/onedark.vim
+
+let vim_markdown_preview_github=1
