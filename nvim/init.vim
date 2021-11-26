@@ -6,6 +6,7 @@ let g:openbrowser_search_engines = extend(
 \ get(g:, 'openbrowser_search_engines', {}),
 \ {
 \   'cppreference': 'https://en.cppreference.com/mwiki/index.php?title=Special%3ASearch&search={query}',
+\   'docrust':'https://doc.rust-lang.org/beta/std/index.html?search={query}',
 \ },
 \ 'keep'
 \)
@@ -14,9 +15,11 @@ let g:config_file_list = ['plugins.vim',
 	\ 'configs/cpp.vim',
     \ 'configs/coc.vim',
     \ 'configs/fzf.vim',
-    \ 'configs/vimspector.vim'
+    \ 'configs/vimspector.vim',
+    \ 'configs/rust.vim'
 	\ ]
 
+let g:rustfmt_autosave = 1
 
 nnoremap <silent> ff :<C-u>Neoformat<CR>
 
@@ -41,6 +44,8 @@ EOF
 set tabstop=4
 set shiftwidth=4
 set expandtab
+syntax enable
+filetype plugin indent on
 
 source $HOME/.config/nvim/themes/airline.vim
 source $HOME/.config/nvim/themes/onedark.vim
