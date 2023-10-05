@@ -29,6 +29,10 @@ vim.keymap.set("n", "gR", function() require("trouble").open("lsp_references") e
 
 -- Lsp
 map('n', '<leader>ff', ':Fmt<CR>')
+--vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
 -- Splits
 map('n', '<C-h>', ':vertical resize -5<CR>')
