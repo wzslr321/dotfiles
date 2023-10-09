@@ -29,16 +29,20 @@ vim.keymap.set("n", "gR", function() require("trouble").open("lsp_references") e
 
 -- Lsp
 map('n', '<leader>ff', ':Fmt<CR>')
---vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '<space>gl', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
 -- Splits
-map('n', '<C-h>', ':vertical resize -5<CR>')
-map('n', '<C-l>', ':vertical resize +5<CR>')
-map('n', '<C-k>', ':resize +5<CR>')
-map('n', '<C-j>', ':resize -5<CR>')
+-- map('n', '<C-h>', ':vertical resize -5<CR>')
+-- map('n', '<C-l>', ':vertical resize +5<CR>')
+--map('n', '<C-k>', ':resize +5<CR>')
+--map('n', '<C-j>', ':resize -5<CR>')
 
 -- ToggleTerm
 map('n', '<leader>tr', ':ToggleTerm<CR>')
+
+--  vim.api.nvim_buf_set_option('n', '<space>gl', function() vim.lsp.diagnostic.show_line_diagnostics() end)
+
+

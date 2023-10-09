@@ -77,3 +77,6 @@ lspconfig.dartls.setup{}
 
 --wing
 lspconfig.wingls.setup{}
+
+--typescript
+require'lspconfig'.tsserver.setup{}
