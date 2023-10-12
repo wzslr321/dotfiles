@@ -75,8 +75,12 @@ lspconfig.digestif.setup{}
 -- flutter 
 lspconfig.dartls.setup{}
 
---wing
+-- wing
 lspconfig.wingls.setup{}
 
---typescript
-require'lspconfig'.tsserver.setup{}
+-- typescript
+lspconfig.tsserver.setup{}
+
+-- haskell
+lspconfig.hls.setup{}
+
