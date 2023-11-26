@@ -45,3 +45,7 @@ map('n', '<leader>tr', ':ToggleTerm<CR>')
 
 -- Detour
 vim.keymap.set('n', '<leader>dd', ":Detour<cr>")
+
+map('n', '<leader>bp', ':DapToggleBreakpoint<CR>')
+map('n', '<leader>rt', ':DapToggleRepl<CR>')
+map('n', '<leader>co', ':DapContinue<CR>')

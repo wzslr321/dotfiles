@@ -1,5 +1,7 @@
 local dap = require('dap')
 
+dap.set_log_level('TRACE')
+
 dap.adapters.codelldb = {
   type = 'executable',
   command = '/opt/homebrew/bin/lldb-vscode',
