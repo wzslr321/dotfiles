@@ -5,11 +5,11 @@ vim.api.nvim_create_user_command('Fmt', function() vim.lsp.buf.format() end, { n
 
 
 local function map(mode, key, action, options)
-	local opts = { noremap = true, silent = true }
-	if (options) then
-		opts = options
-	end
-	return vim.api.nvim_set_keymap(mode, key, action, opts)
+    local opts = { noremap = true, silent = true }
+    if (options) then
+        opts = options
+    end
+    return vim.api.nvim_set_keymap(mode, key, action, opts)
 end
 
 -- Nvim
@@ -43,10 +43,7 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 -- ToggleTerm
 map('n', '<leader>tr', ':ToggleTerm<CR>')
 
---  vim.api.nvim_buf_set_option('n', '<space>gl', function() vim.lsp.diagnostic.show_line_diagnostics() end)
-
-
-map('n', '<leader>q', ':Detour<CR>')
+vim.keymap.set('n', '<leader>dd', ":Detour<cr>")
 
 map('n', '<leader>df', ':!dart format -l 120 %<CR>')
 

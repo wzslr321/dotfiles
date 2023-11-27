@@ -1,25 +1,30 @@
 \documentclass[12pt, a4paper]{article} % default font size, paper size, document type
 \title{Latex Cheatsheet}
 \usepackage{graphicx} %  allows for images
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \graphicspath{{images/}} % specifies directory with images
 \author{Wiktor Zajac}
 \date{October 2023}
-\begin{document} 
+\begin{document}
 
-\maketitle Latex cheatsheet 
+\maketitle
 \vspace{5mm}
 
-\textbf{bold text} 
+\section{Random}
 
-\textit{italic text} 
+\textbf{bold text}
 
-\underline{underline} 
+\textit{italic text}
+
+\underline{underline}
 
 \emph{normal emphasize}
 
-\textit{emphasize inside italic - \emph{emph}} 
+\textit{emphasize inside italic - \emph{emph}}
 
-\textbf{emphasize inside bold - \emph{emph}} 
+\textbf{emphasize inside bold - \emph{emph}}
 
 
 \begin{figure}[h]
@@ -63,10 +68,10 @@ Minimalne wersje systemowe wspierane.
 In physics, the mass-energy equivalence is stated by the equation $E=mc^2$, discovered in 1905 by Albert Einstein.
 
 \begin{math}
-	E=mc^2	
+	E=mc^2
 \end{math}
 
-\[E=mc^2\] 
+\[E=mc^2\]
 
 \begin{equation}
 	E=mc^2
@@ -87,5 +92,18 @@ Lower case greek letters = $\omega$ $\delta$, uppercase = $\Omega$ $\Delta$
 
 Mathemtical operators are prefixed with a backslash as $\sin(\beta)$, $\cos(\alpha)$, $\log(x)$ etc.
 
-siema
+\section{Math}
+
+\subsection{Math Mode Accents}
+
+\begin{align*}
+    \hat{a}&hat & \bar{a}&bar & \vec{a}&vec \\
+\end{align*}
+
+\begin{align*}
+    \alpha && \beta && \gamma && \delta \\
+
+\end{align*}
+
+
 \end{document}
