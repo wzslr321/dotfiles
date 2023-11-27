@@ -14,6 +14,9 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=-1
 set nu rnu
+set cursorline
+set cursorlineopt=number
+set laststatus=2
 
 let g:tex_flavor='latex' 
 let g:vimtex_view_method = 'skim' 

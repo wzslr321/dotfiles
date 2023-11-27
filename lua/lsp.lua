@@ -9,6 +9,7 @@ vim.diagnostic.config {
 	update_in_insert = false,
 	severity_sort = false
 }
+vim.api.nvim_create_user_command('Rename', function () vim.lsp.buf.rename() end, {nargs=0})
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -73,7 +74,7 @@ lspconfig.digestif.setup{}
 
 
 -- flutter 
-lspconfig.dartls.setup{}
+-- lspconfig.dartls.setup{}
 
 --wing
 lspconfig.wingls.setup{}

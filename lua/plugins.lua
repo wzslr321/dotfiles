@@ -48,6 +48,15 @@ require("lazy").setup({
 		lazy = false,
 	},
 	{
+		'akinsho/flutter-tools.nvim',
+		lazy = false,
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			'stevearc/dressing.nvim', -- optional for vim.ui.select
+		},
+		config = true,
+	},
+	{
 		"L3MON4D3/LuaSnip",
 	},
 	{
@@ -62,6 +71,12 @@ require("lazy").setup({
 			"nvim-lua/plenary.nvim",
 		},
 	},
+	{ 
+		"carbon-steel/detour.nvim",
+	},
+	{ 
+		'mfussenegger/nvim-dap',
+	}
 })
 
 require("toggleterm").setup {}
@@ -77,4 +92,76 @@ require 'nvim-treesitter.configs'.setup {
 		additional_vim_regex_highlighting = false,
 	},
 	modules = {}
+}
+
+require("flutter-tools").setup {
+  lsp = {
+    color = {
+      enabled = true,
+    },
+    settings = {
+      showTodos = true,
+      completeFunctionCalls = true,
+      analysisExcludedFolders = {},
+    }
+  }
+
+}
+
+local dap = require('dap')
+
+dap.adapters.dart = {
+  type = 'executable',
+  command = 'dart',
+  args = {'debug_adapter'}
+}
+
+dap.adapters.flutter = {
+  type = 'executable',
+  command = 'flutter',
+  args = {'debug_adapter'}
+}
+
+dap.set_log_level('TRACE')
+dap.configurations.dart = {
+  {
+    type = "flutter",
+    request = "launch",
+    name = "Launch Flutter | Development",
+    dartSdkPath = "/Users/wiktor.zajac/fltuter/bin/dart", 
+    flutterSdkPath = "/Users/wiktor.zajac/flutter/bin/flutter",                  
+    program = "${workspaceFolder}/lib/main_development.dart",     
+    cwd = "${workspaceFolder}",
+	toolArgs = {"-d", "7029C1E6-5CE5-4A6A-AFF2-80E0AD32D792", "--flavor","development"}
+  },
+  {
+    type = "flutter",
+    request = "launch",
+    name = "Launch Flutter | Mock",
+    dartSdkPath = "/Users/wiktor.zajac/fltuter/bin/dart", 
+    flutterSdkPath = "/Users/wiktor.zajac/flutter/bin/flutter",                  
+    program = "${workspaceFolder}/lib/main_mock.dart",     
+    cwd = "${workspaceFolder}",
+	toolArgs = {"-d", "7029C1E6-5CE5-4A6A-AFF2-80E0AD32D792", "--flavor","development"}
+  },
+  {
+    type = "flutter",
+    request = "launch",
+    name = "Launch Flutter | Production",
+    dartSdkPath = "/Users/wiktor.zajac/fltuter/bin/dart", 
+    flutterSdkPath = "/Users/wiktor.zajac/flutter/bin/flutter",                  
+    program = "${workspaceFolder}/lib/main_prod.dart",     
+    cwd = "${workspaceFolder}",
+	toolArgs = {"-d", "7029C1E6-5CE5-4A6A-AFF2-80E0AD32D792", "--flavor","production"}
+  },
+  {
+    type = "flutter",
+    request = "launch",
+    name = "Launch Flutter | Staging",
+    dartSdkPath = "/Users/wiktor.zajac/fltuter/bin/dart", 
+    flutterSdkPath = "/Users/wiktor.zajac/flutter/bin/flutter",                  
+    program = "${workspaceFolder}/lib/main_staging.dart",     
+    cwd = "${workspaceFolder}",
+	toolArgs = {"-d", "7029C1E6-5CE5-4A6A-AFF2-80E0AD32D792", "--flavor","staging"}
+  }
 }

@@ -3,6 +3,10 @@ require("nvim-tree").setup({
   view = {
     width = 30,
   },
+  diagnostics = {
+	  enable = true,
+	  show_on_dirs = true,
+  },
   renderer = {
     group_empty = true,
   },

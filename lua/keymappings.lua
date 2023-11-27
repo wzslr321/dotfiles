@@ -37,8 +37,8 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 -- Splits
 -- map('n', '<C-h>', ':vertical resize -5<CR>')
 -- map('n', '<C-l>', ':vertical resize +5<CR>')
---map('n', '<C-k>', ':resize +5<CR>')
---map('n', '<C-j>', ':resize -5<CR>')
+-- map('n', '<C-i>', ':resize +5<CR>')
+-- map('n', '<C-j>', ':resize -5<CR>')
 
 -- ToggleTerm
 map('n', '<leader>tr', ':ToggleTerm<CR>')
@@ -46,3 +46,13 @@ map('n', '<leader>tr', ':ToggleTerm<CR>')
 --  vim.api.nvim_buf_set_option('n', '<space>gl', function() vim.lsp.diagnostic.show_line_diagnostics() end)
 
 
+map('n', '<leader>q', ':Detour<CR>')
+
+map('n', '<leader>df', ':!dart format -l 120 %<CR>')
+
+-- nvim-dap
+local dap = require'dap'
+
+map('n', '<leader>bp', ':DapToggleBreakpoint<CR>')
+map('n', '<leader>rt', ':DapToggleRepl<CR>')
+map('n', '<leader>co', ':DapContinue<CR>')
