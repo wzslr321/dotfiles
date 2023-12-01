@@ -85,6 +85,9 @@ require("lazy").setup({
     },
     {
         'mfussenegger/nvim-dap',
+    },
+    {
+        'rcarriga/nvim-dap-ui',
     }
 })
 
@@ -107,10 +110,9 @@ require("flutter-tools").setup {
 }
 
 require "presence".setup({
-    auto_update = true,
+    -- auto_update = true,
     main_image = "file",
     enable_line_number = true,
-    editing_text = "Editing...",
 })
 
 local dap = require('dap')
