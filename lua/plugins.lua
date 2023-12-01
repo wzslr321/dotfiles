@@ -69,6 +69,9 @@ require("lazy").setup({
     },
     {
         'mfussenegger/nvim-dap',
+    },
+    {
+        'rcarriga/nvim-dap-ui',
     }
 })
 
@@ -77,7 +80,7 @@ require "toggleterm".setup {}
 require("luasnip.loaders.from_snipmate").lazy_load()
 
 require "presence".setup({
-    auto_update = true,
+    -- auto_update = true,
     show_time = true,
     main_image = "file",
     enable_line_number = true,

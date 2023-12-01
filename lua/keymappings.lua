@@ -49,3 +49,7 @@ vim.keymap.set('n', '<leader>dd', ":Detour<cr>")
 map('n', '<leader>bp', ':DapToggleBreakpoint<CR>')
 map('n', '<leader>rt', ':DapToggleRepl<CR>')
 map('n', '<leader>co', ':DapContinue<CR>')
+
+local widgets = require('dap.ui.widgets')
+local sidebar = widgets.sidebar(widgets.scopes)
+vim.keymap.set('n', '<leader>dw', function() sidebar.open() end)
