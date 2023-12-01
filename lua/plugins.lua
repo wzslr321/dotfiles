@@ -12,15 +12,18 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    {
-        'andweeb/presence.nvim',
-        lazy = false,
-    },
+{
+'andweeb/presence.nvim',
+lazy = false,
+},
     {
         "folke/tokyonight.nvim",
         lazy = false,
         priority = 1000,
         opts = {},
+    },
+    {
+        'vim-airline/vim-airline'
     },
     {
         'nvim-telescope/telescope.nvim',
@@ -63,7 +66,7 @@ require("lazy").setup({
     {
         'nvim-tree/nvim-tree.lua'
     },
-    { 'akinsho/toggleterm.nvim', version = "*", opts = {} },
+    { 'akinsho/toggleterm.nvim', opts = {} },
     {
         'simrat39/rust-tools.nvim',
     },
@@ -85,12 +88,6 @@ require "toggleterm".setup {}
 -- require "rust-tools".setup {}
 require("luasnip.loaders.from_snipmate").lazy_load()
 
-require "presence".setup({
-    auto_update = true,
-    show_time = true,
-    main_image = "file",
-    enable_line_number = true,
-})
 
 require("flutter-tools").setup {
   lsp = {
@@ -105,6 +102,13 @@ require("flutter-tools").setup {
   }
 
 }
+
+require"presence".setup({
+    auto_update = true,
+    main_image = "file",
+    enable_line_number=true,
+    editing_text="Editing...",
+})
 
 local dap = require('dap')
 
@@ -148,7 +152,7 @@ dap.configurations.dart = {
     name = "Launch Flutter | Production",
     dartSdkPath = "/Users/wiktor.zajac/fltuter/bin/dart",
     flutterSdkPath = "/Users/wiktor.zajac/flutter/bin/flutter",
-    program = "${workspaceFolder}/lib/main_prod.dart",
+    program = "${workspaceFolder}/lib/main_production.dart",
     cwd = "${workspaceFolder}",
 	toolArgs = {"-d", "7029C1E6-5CE5-4A6A-AFF2-80E0AD32D792", "--flavor","production"}
   },
