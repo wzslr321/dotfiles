@@ -3,53 +3,66 @@ vim.g.mapleader = ' ';
 -- helpers
 vim.api.nvim_create_user_command('Fmt', function() vim.lsp.buf.format() end, { nargs = 0 })
 
-
 local function map(mode, key, action, options)
     local opts = { noremap = true, silent = true }
     if (options) then
         opts = options
     end
-    return vim.api.nvim_set_keymap(mode, key, action, opts)
+    return vim.keymap.set(mode, key, action, opts)
 end
 
--- Nvim
-map('n', '<leader>tt', ':terminal<CR>')
+map('n', '<leader>df', ':!dart format -l 120 %<CR>')
 
+-- Lsp
+map('n', '<leader>ff', ':Fmt<CR>')
+map('n', '<space>gl', vim.diagnostic.open_float)
+map('n', '[d', vim.diagnostic.goto_prev)
+map('n', ']d', vim.diagnostic.goto_next)
+map('n', '<space>q', vim.diagnostic.setloclist)
+
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+    callback = function(ev)
+        vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+        local opts = { buffer = ev.buf }
+        map('n', 'gD', vim.lsp.buf.declaration, opts)
+        map('n', 'gd', vim.lsp.buf.definition, opts)
+        map('n', 'K', vim.lsp.buf.hover, opts)
+        map('n', 'gi', vim.lsp.buf.implementation, opts)
+        map('n', '<space>D', vim.lsp.buf.type_definition, opts)
+        map('n', '<space>rn', vim.lsp.buf.rename, opts)
+        map({ 'n', 'v' }, '<space>a', vim.lsp.buf.code_action, opts)
+        map('n', '<space>f', function() vim.lsp.buf.format { async = true } end, opts)
+    end,
+})
 
 -- NvimTree
 map('n', '<leader>e', ':NvimTreeToggle<CR>')
 
+-- Trouble
+local trouble = require 'trouble'
 map('n', '<leader>xa', ':TroubleToggle<CR>')
-vim.keymap.set("n", "<leader>xx", function() require("trouble").open() end)
-vim.keymap.set("n", "<leader>xw", function() require("trouble").open("workspace_diagnostics") end)
-vim.keymap.set("n", "<leader>xd", function() require("trouble").open("document_diagnostics") end)
-vim.keymap.set("n", "<leader>xq", function() require("trouble").open("quickfix") end)
-vim.keymap.set("n", "<leader>xl", function() require("trouble").open("loclist") end)
-vim.keymap.set("n", "gR", function() require("trouble").open("lsp_references") end)
+map("n", "<leader>xw", function() trouble.open("workspace_diagnostics") end)
+map("n", "<leader>xd", function() trouble.open("document_diagnostics") end)
+map("n", "<leader>xq", function() trouble.open("quickfix") end)
+map("n", "<leader>xl", function() trouble.open("loclist") end)
+map("n", "gr", function() trouble.open("lsp_references") end)
 
--- Lsp
-map('n', '<leader>ff', ':Fmt<CR>')
-vim.keymap.set('n', '<space>gl', vim.diagnostic.open_float)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
 -- Splits
-map('n', '<C-h>', ':vertical resize -5<CR>')
-map('n', '<C-l>', ':vertical resize +5<CR>')
-map('n', '<C-k>', ':resize +5<CR>')
-map('n', '<C-j>', ':resize -5<CR>')
+map('n', '<space>rh>', ':vertical resize -5<CR>')
+map('n', '<space>rl', ':vertical resize +5<CR>')
+map('n', '<space>ri', ':resize +5<CR>')
+map('n', '<space>rj', ':resize -5<CR>')
 
 -- ToggleTerm
 map('n', '<leader>tr', ':ToggleTerm<CR>')
 
 -- Detour
-vim.keymap.set('n', '<leader>dd', ":Detour<cr>")
+map('n', '<leader>dd', ":Detour<cr>")
 
-map('n', '<leader>bp', ':DapToggleBreakpoint<CR>')
-map('n', '<leader>rt', ':DapToggleRepl<CR>')
-map('n', '<leader>co', ':DapContinue<CR>')
-
-local widgets = require('dap.ui.widgets')
-local sidebar = widgets.sidebar(widgets.scopes)
-vim.keymap.set('n', '<leader>dw', function() sidebar.open() end)
+-- nvim-dap
+map('n', '<leader>dbp', ':DapToggleBreakpoint<CR>')
+map('n', '<leader>dtr', ':DapToggleRepl<CR>')
+map('n', '<leader>dc', ':DapContinue<CR>')
