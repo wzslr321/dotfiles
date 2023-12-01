@@ -1,4 +1,5 @@
 lazy-lock.json
+.idea/
 .config/
 lua/.luarc.json
 
