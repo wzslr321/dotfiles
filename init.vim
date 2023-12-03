@@ -69,7 +69,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
  
-# Code stats plugin config
+" Code stats plugin config
 let g:codestats_api_key=$CODE_STATS_KEY
 let g:airline_section_x=airline#section#create_right(['tagbar', 'filetype', '%{CodeStatsXp()}'])
 

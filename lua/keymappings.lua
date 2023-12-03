@@ -66,3 +66,10 @@ map('n', '<leader>dd', ":Detour<cr>")
 map('n', '<leader>dbp', ':DapToggleBreakpoint<CR>')
 map('n', '<leader>dtr', ':DapToggleRepl<CR>')
 map('n', '<leader>dc', ':DapContinue<CR>')
+
+--telescope
+local telescope = require 'telescope.builtin';
+map('n', '<leader>ff', function() telescope.find_files() end)
+map('n', '<leader>fg', function() telescope.live_grep() end)
+map('n', '<leader>fb', function() telescope.buffers() end)
+map('n', '<leader>fh', function() telescope.help_tags() end)

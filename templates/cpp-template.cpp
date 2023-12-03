@@ -2,7 +2,15 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
+#include <cmath>
+#include <queue>
+#include <stack>
 #include <algorithm>
+
+#define rep(i, a, b) for (int i = a; i < (b); ++i)
+
+typedef long long ll;
+typedef long double ld;
 
 using namespace std;
 

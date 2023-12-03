@@ -13,10 +13,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     {
-        'andweeb/presence.nvim',
-        lazy = false,
-    },
-    {
         "folke/tokyonight.nvim",
         lazy = false,
         priority = 1000,
@@ -31,7 +27,6 @@ require("lazy").setup({
     {
         'vim-airline/vim-airline'
     },
-    -- CONFIGURE KEYMAPS FOR TELESCOPE
     {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.3',
@@ -91,9 +86,18 @@ require("lazy").setup({
     }
 })
 
+vim.diagnostic.config {
+    virtual_text = true,
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = false
+}
+
 require "toggleterm".setup {}
 require "luasnip.loaders.from_snipmate".lazy_load()
 
+-- Only flutter related below
 
 require("flutter-tools").setup {
     lsp = {
@@ -106,14 +110,7 @@ require("flutter-tools").setup {
             analysisExcludedFolders = {},
         }
     }
-
 }
-
-require "presence".setup({
-    -- auto_update = true,
-    main_image = "file",
-    enable_line_number = true,
-})
 
 local dap = require('dap')
 
@@ -173,10 +170,3 @@ dap.configurations.dart = {
     }
 }
 
-vim.diagnostic.config {
-    virtual_text = true,
-    signs = true,
-    underline = true,
-    update_in_insert = false,
-    severity_sort = false
-}

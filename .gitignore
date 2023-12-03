@@ -9,3 +9,4 @@ lua/.luarc.json
 **/*.fls
 **/*.log
 **/*.synctex.gz
+**/*.toc
