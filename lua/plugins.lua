@@ -66,9 +66,9 @@ require("lazy").setup({
         'nvim-tree/nvim-tree.lua'
     },
     { 'akinsho/toggleterm.nvim', opts = {} },
-    {
-        'simrat39/rust-tools.nvim',
-    },
+--    {
+--        'simrat39/rust-tools.nvim',
+--    },
     {
         "carbon-steel/detour.nvim",
     },

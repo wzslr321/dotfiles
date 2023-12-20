@@ -19,3 +19,17 @@ lspconfig.digestif.setup {}
 
 -- cpp
 lspconfig.clangd.setup {}
+
+-- rust
+lspconfig.rust_analyzer.setup {
+    settings = {
+        ['rust-analyzer'] = {
+            diagnostics = {
+                enable = false,
+            },
+            checkOnSave = {
+                allTargets = false,
+            }
+        },
+    }
+}
