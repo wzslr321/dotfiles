@@ -1,23 +1,8 @@
-call plug#begin()
-
-Plug 'https://gitlab.com/code-stats/code-stats-vim.git'
-
-call plug#end()
-
-function! SilentPlugInstall()
-    execute 'silent! PlugInstall' | execute 'silent! q'
-endfunction
-
-" Somehow code-stats plugin does not work without it
-" If someone know how to make it work without it please let me know
-autocmd VimEnter * call SilentPlugInstall() 
-
 lua require('plugins')
 lua require('lsp')
 lua require('plugins/nvim-cmp')
 lua require('plugins/nvim-dap')
 lua require('plugins/nvim-tree')
-lua require('plugins/rust-tools')
 lua require('keymappings')
 lua require('init')
 
@@ -69,23 +54,4 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
  
-" Code stats plugin config
-let g:codestats_api_key=$CODE_STATS_KEY
-let g:airline_section_x=airline#section#create_right(['tagbar', 'filetype', '%{CodeStatsXp()}'])
-
 let g:use_clangd = 1
-
-call plug#begin()
-    Plug 'https://gitlab.com/code-stats/code-stats-vim.git'
-    Plug 'vim-airline/vim-airline'
-call plug#end()
-
-let g:codestats_api_key = 'SFMyNTY.WTNKbFlYUnBlQT09IyNNakUyTmpJPQ.7iYfkpTR3bP1M3ZaNPpASBDim7OknvyX2LLVKWjpPLw'
-let g:airline_section_x = airline#section#create_right(['tagbar', 'filetype', '%{CodeStatsXp()}'])
-
-function! SilentPlugInstall()
-    execute 'silent! PlugInstall' | execute 'silent! q'
-endfunction
-
-autocmd VimEnter * call SilentPlugInstall()
-

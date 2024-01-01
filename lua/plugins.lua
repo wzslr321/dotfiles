@@ -13,16 +13,13 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     {
+        'vim-airline/vim-airline',
+    },
+    {
         "folke/tokyonight.nvim",
         lazy = false,
         priority = 1000,
         opts = {},
-    },
-    {
-        "ray-x/lsp_signature.nvim",
-        event = "VeryLazy",
-        opts = {},
-        config = function(_, opts) require 'lsp_signature'.setup(opts) end
     },
     {
         'vim-airline/vim-airline'
@@ -66,9 +63,6 @@ require("lazy").setup({
         'nvim-tree/nvim-tree.lua'
     },
     { 'akinsho/toggleterm.nvim', opts = {} },
---    {
---        'simrat39/rust-tools.nvim',
---    },
     {
         "carbon-steel/detour.nvim",
     },
