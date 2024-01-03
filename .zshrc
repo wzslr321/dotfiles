@@ -1,6 +1,8 @@
+
 eval $(/opt/homebrew/bin/brew shellenv)
 python3 -m site &> /dev/null && PATH="$PATH:`python3 -m site --user-base`/bin"
 
+export ZELLIJ_CONFIG_DIR="/Users/wiktor/dotfiles/zellij/"
 export PATH="/Users/wiktor/.local/bin:$PATH"
 export PATH="/usr/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
@@ -59,3 +61,9 @@ cdq() {
 nps() {
     mkdir "$1" && cd "$1" && cpc && mkdir out
 }
+
+if [[ -z "$ZELLIJ" ]]; then
+    zellij attach default
+fi
+
+source ~/dotfiles/zellij/.zellij.conf
