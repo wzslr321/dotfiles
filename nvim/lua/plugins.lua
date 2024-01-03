@@ -77,6 +77,12 @@ require("lazy").setup({
     },
     {
         'rcarriga/nvim-dap-ui',
+    },
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        ft = { "markdown" },
+        build = function() vim.fn["mkdp#util#install"]() end,
     }
 })
 
@@ -163,4 +169,3 @@ dap.configurations.dart = {
         toolArgs = { "-d", "7029C1E6-5CE5-4A6A-AFF2-80E0AD32D792", "--flavor", "staging" }
     }
 }
-

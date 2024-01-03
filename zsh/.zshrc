@@ -36,6 +36,7 @@ alias cmps="g++ main.cpp -fsanitize=undefined -o out/main --std=c++20"
 alias cr="./out/main"
 alias cmpa="as -o main.o main.s && /usr/bin/clang -o main main.o -e _start -arch arm64"
 alias cmpos="cargo +nightly run -Z build-std=core,compiler_builtins --target x86_64-blog_os.json build-std-features=compiler-builtins-mem"
+alias c="clear"
 
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source <(kubectl completion zsh)
