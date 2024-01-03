@@ -1,0 +1,116 @@
+\documentclass[12pt, a4paper]{article}
+\title{Dotfiles Cheatsheet}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.75in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\graphicspath{{/.images}}
+\author{Wiktor Zając}
+\begin{document}
+\maketitle
+\vspace{5mm}
+\tableofcontents
+
+\section{Plugins}
+
+\begin{itemize}
+    \item andweeb/presence.nvim | Discord Rich Presence
+    \item folke/tokyonight.nvim | Theme
+    \item ray-x/lsp-signature.nvim | Show type signature while typing
+    \item vim-airline/vim-airline.nvim | Line on the bottom with configurable info
+    \item nvim-telescope/telescope.nvim | Finder
+    \item neovim/nvim-lspconfig.nvim | Lsp
+    \item hrsh7th/cmp-nvim-lsp | Lsp
+    \item folke/trouble.nvim | Diagnostics
+    \item lervag/vimtex | Latex
+    \item nvim-lua/plenary.nvim | Helper for lua functions
+    \item stevearc/dressing.nvim | Optional for some UI improvements in plugins
+    \item akinsho/flutter-tools.nvim | Flutter Development Kit
+    \item L3MON4D3/LuaSnip | Snippets
+    \item nvim-tree/nvim-tree.lua | Files Tree
+    \item akinsho/toggleterm.nvim | Terminal inside nvim
+    \item simrat39/rust-tools.nvim | Rust Development Kit
+    \item carbon-steel/detour.nvim | Popup window of current tab to dive into definitions easily
+    \item SirVer/ultisnips | Snippets
+    \item honza/vim-snippets | Snippets
+    \item mfussenegger/nvim-dap | Debugger
+\end{itemize}
+
+\section{Keybindings}
+
+\subsection{iTerm2}
+
+\begin{itemize}
+    \item Cmd + T $\rightarrow$ New Tab
+    \item Cmd + Option + Arrow Key $\rightarrow$ Go to Split Pane by direction
+    \item Cmd + D $\rightarrow$ Split Window Vertically 
+    \item Cmd + Shift + D $\rightarrow$ Split Window Horizontally 
+    \item Ctrl + Cmd + Arrow $\rightarrow$ Resize Pane
+\end{itemize}
+
+\subsection{General}
+\begin{itemize}
+    \item Space + rh $\rightarrow$ vertical resize -5
+    \item Space + rl $\rightarrow$ vertical resize +5
+    \item Space + ri $\rightarrow$ resize +5
+    \item Space + rj $\rightarrow$ resize -5
+\end{itemize}
+
+\subsection{Lsp}
+
+\begin{itemize}
+    \item gD $\rightarrow$ Declaration
+    \item gd $\rightarrow$ Definition 
+    \item gi $\rightarrow$ Implementation 
+    \item K $\rightarrow$ Hover
+    \item D $\rightarrow$ Type Definition
+    \item Space + rn $\rightarrow$ Rename
+    \item Space + a $\rightarrow$ Code Action
+    \item Space + f$\rightarrow$ Format 
+\end{itemize}
+
+\subsection{Plugins}
+
+\textbf{NvimTree}
+\begin{itemize}
+    \item Space + e  $\rightarrow$ Tree Toggle
+\end{itemize}
+
+\textbf{Trouble}
+\begin{itemize}
+    \item Space + xa $\rightarrow$ Trouble Toggle
+    \item Space + xw $\rightarrow$ Workspace Diagnostics 
+    \item Space + xd $\rightarrow$ Document Diagnostics 
+    \item Space + xq $\rightarrow$ Quickfix 
+    \item Space + xl $\rightarrow$ Loclist 
+    \item gr $\rightarrow$ Lsp References 
+\end{itemize}
+
+\textbf{ToggleTerm}
+\begin{itemize}
+    \item Space + tr  $\rightarrow$ Toggle Term
+\end{itemize}
+
+\textbf{Detour}
+\begin{itemize}
+    \item Space + dd  $\rightarrow$ Detour 
+\end{itemize}
+
+\textbf{Nvim-Dap}
+\begin{itemize}
+    \item Space + dbp  $\rightarrow$ Toggle Breakpoint 
+    \item Space + dtr  $\rightarrow$ Toggle Repl 
+    \item Space + dc  $\rightarrow$ Continue 
+\end{itemize}
+
+\textbf{Telescope}
+\begin{itemize}
+    \item Space + ff $\rightarrow$ Find Files 
+    \item Space + fg $\rightarrow$ Live Grep 
+    \item Space + fb $\rightarrow$ Buffers 
+    \item Space + fh $\rightarrow$ Help Tags 
+\end{itemize}
+
+\end{document}
