@@ -1,36 +1,44 @@
-
+# Some random stuff  
 eval $(/opt/homebrew/bin/brew shellenv)
-python3 -m site &> /dev/null && PATH="$PATH:`python3 -m site --user-base`/bin"
 
-export ZELLIJ_CONFIG_DIR="/Users/wiktor/dotfiles/zellij/"
-export PATH="/Users/wiktor/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="/usr/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
-export PATH="$PATH:/Users/wiktor/flutter/bin"
-export PATH="/Users/wiktor/textec:$PATH"
+export PATH="$PATH:$HOME/flutter/bin"
+export PATH="$HOME/textec:$PATH"
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
+export DOTFILES="$HOME/dotfiles"
+
+# C++ 
 export LDFLAGS="-L/opt/homebrew/opt/llvm/lib/c++ -Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++"
-# export LDFLAGS="-L/opt/homebrew/opt/libpq/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
 
-export NODE_OPTIONS=--stack-trace-limit=100
-export RUST_BACKTRACE=full
+# Zellij
+export ZELLIJ_CONFIG_DIR="$DOTFILES/zellij/"
 
+if [[ -z "$ZELLIJ" ]]; then
+    zellij attach default
+fi
 
+source ~/dotfiles/zellij/.zellij.conf
+
+# ZSH
 export ZSH="$HOME/.oh-my-zsh"
-
 ZSH_THEME="robbyrussell"
 
 plugins=(git)
 plugins+=(zsh-vi-mode)
 
 source $ZSH/oh-my-zsh.sh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source <(kubectl completion zsh)
 
+# Aliases
 alias b="cd .."
-alias cpt="cp ~/.config/nvim/templates/main.tex "
-alias cpr="rm src/main.rs && cp ~/.config/nvim/templates/rust-template.rs src/main.rs"
-alias cpc="cp ~/.config/nvim/templates/cpp-template.cpp main.cpp"
+alias cpt="cp $DOTFILES/nvim/templates/main.tex "
+alias cpr="rm src/main.rs && cp $DOTFILES/nvim/templates/rust-template.rs src/main.rs"
+alias cpc="cp $DOTFILES/nvim/templates/cpp-template.cpp main.cpp"
 alias cmp="rm -r out && mkdir out && g++ main.cpp --std=c++20 -o out/main"
 alias cmps="g++ main.cpp -fsanitize=undefined -o out/main --std=c++20"
 alias cr="./out/main"
@@ -38,17 +46,14 @@ alias cmpa="as -o main.o main.s && /usr/bin/clang -o main main.o -e _start -arch
 alias cmpos="cargo +nightly run -Z build-std=core,compiler_builtins --target x86_64-blog_os.json build-std-features=compiler-builtins-mem"
 alias c="clear"
 
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source <(kubectl completion zsh)
+# gcloud
+if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/wiktor/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/wiktor/google-cloud-sdk/path.zsh.inc'; fi
+# Haskell
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" 
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/wiktor/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/wiktor/google-cloud-sdk/completion.zsh.inc'; fi
-
-[ -f "/Users/wiktor/.ghcup/env" ] && source "/Users/wiktor/.ghcup/env" # ghcup-envexport PATH="/opt/homebrew/opt/libpq/bin:$PATH"
-
+# My lil program to make cd more convinient https://github.com/wzslr321/cdq
 cdq() {
     local output=$(~/Remi/rust/cdq/target/debug/cdq $1)
     echo $output
@@ -59,12 +64,8 @@ cdq() {
     fi
 }
 
+# Helpers
 nps() {
     mkdir "$1" && cd "$1" && cpc && mkdir out
 }
 
-if [[ -z "$ZELLIJ" ]]; then
-    zellij attach default
-fi
-
-source ~/dotfiles/zellij/.zellij.conf
