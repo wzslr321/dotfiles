@@ -1,0 +1,20 @@
+{
+    "workspace.library": [
+        "/Users/wiktor/.config/nvim",
+        "/Users/wiktor/.local/share/nvim/site",
+        "/Users/wiktor/.local/share/nvim/lazy/lazy.nvim",
+        "/Users/wiktor/.local/share/nvim/lazy/nvim-treesitter",
+        "/Users/wiktor/.local/share/nvim/lazy/plenary.nvim",
+        "/Users/wiktor/.local/share/nvim/lazy/telescope.nvim",
+        "/Users/wiktor/.local/share/nvim/lazy/nvim-cmp",
+        "/Users/wiktor/.local/share/nvim/lazy/nvim-lspconfig",
+        "/Users/wiktor/.local/share/nvim/lazy/cmp-nvim-lsp",
+        "/Users/wiktor/.local/share/nvim/lazy/tokyonight.nvim",
+        "/opt/homebrew/Cellar/neovim/0.9.2/share/nvim/runtime",
+        "/opt/homebrew/Cellar/neovim/0.9.2/share/nvim/runtime/pack/dist/opt/matchit",
+        "/opt/homebrew/Cellar/neovim/0.9.2/lib/nvim",
+        "/Users/wiktor/.local/state/nvim/lazy/readme",
+        "/Users/wiktor/.local/share/nvim/lazy/cmp-nvim-lsp/after",
+        "${3rd}/luassert/library"
+    ]
+}
