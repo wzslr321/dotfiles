@@ -1,5 +1,20 @@
-## My humble nvim config
+### What do I use?
 
-I use it to code mainly in Flutter, C++ & Rust.
 
-It contains cool support for LaTeX, that's why instead of comprehensive readme, there is [PDF File](https://github.com/wzslr321/nvim-config/blob/main/main.pdf) which lists all the plugins and is my small personal cheatsheet for keybindings.
+#### Main things:
+
+- Terminal: iTerm2
+- Editor: Neovim
+- File Manager: yazi
+- Shell: zsh
+- Terminal Workspace: Zellij
+- Git: Lazygit
+
+---
+
+Besides these *bigger* tools, I also decided to list things I often use, but these do not require a specific config.
+
+// Fill those
+- bat | `cat` with cool syntax highlighting
+- fd | `find` alternative
+- gh | GitHub in command line 
