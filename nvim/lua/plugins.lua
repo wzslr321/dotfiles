@@ -77,12 +77,18 @@ require("lazy").setup({
     },
     {
         'rcarriga/nvim-dap-ui',
+        dependencies = {
+            'mfussenegger/nvim-dap',
+        }
     },
     {
         "iamcco/markdown-preview.nvim",
         cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
         ft = { "markdown" },
         build = function() vim.fn["mkdp#util#install"]() end,
+    },
+    {
+        'folke/neodev.nvim',
     }
 })
 
@@ -166,6 +172,12 @@ dap.configurations.dart = {
         flutterSdkPath = "/Users/wiktor.zajac/flutter/bin/flutter",
         program = "${workspaceFolder}/lib/main_staging.dart",
         cwd = "${workspaceFolder}",
-        toolArgs = { "-d", "7029C1E6-5CE5-4A6A-AFF2-80E0AD32D792", "--flavor", "staging" }
+        toolArgs = { "-d", "70229C1E6-5CE5-4A6A-AFF2-80E0AD32D792", "--flavor", "staging" }
     }
 }
+
+require("neodev").setup({
+    library = { plugins = { "nvim-dap-ui" }, types = true },
+})
+
+require('dapui').setup()
