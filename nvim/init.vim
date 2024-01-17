@@ -41,7 +41,7 @@ let g:vimtex_compiler_latexmk = {
 
 let maplocalleader = "'"
 
-colorscheme tokyonight-night
+" colorscheme tokyonight-night
 
 " TODO figure out why I did this
 :tnoremap <Esc> <C-\><C-n> 

@@ -16,13 +16,20 @@ require("lazy").setup({
         'vim-airline/vim-airline',
     },
     {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        priority = 1000,
+        "tiagovla/tokyodark.nvim",
         opts = {},
+        config = function(_, opts)
+            require("tokyodark").setup(opts) -- calling setup is optional
+            vim.cmd [[colorscheme tokyodark]]
+        end,
     },
     {
         'vim-airline/vim-airline'
+    },
+    {
+        'numToStr/Comment.nvim',
+        config = true,
+        lazy = false
     },
     {
         'nvim-telescope/telescope.nvim',
@@ -89,7 +96,7 @@ require("lazy").setup({
     },
     {
         'folke/neodev.nvim',
-    }
+    },
 })
 
 vim.diagnostic.config {

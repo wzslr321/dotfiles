@@ -79,4 +79,4 @@ map('n', '<leader>fh', function() telescope.help_tags() end)
 local dapui = require 'dapui';
 map('n', '<leader>dut', function() dapui.toggle() end)
 map('n', '<leader>due', function() dapui.eval() end)
-map('n', '<laeder>duf', function() dapui.float_element() end)
+map('n', '<leader>duf', function() dapui.float_element() end)
