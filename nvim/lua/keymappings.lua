@@ -73,3 +73,10 @@ map('n', '<leader>ff', function() telescope.find_files() end)
 map('n', '<leader>fg', function() telescope.live_grep() end)
 map('n', '<leader>fb', function() telescope.buffers() end)
 map('n', '<leader>fh', function() telescope.help_tags() end)
+
+
+-- dap-ui
+local dapui = require 'dapui';
+map('n', '<leader>dut', function() dapui.toggle() end)
+map('n', '<leader>due', function() dapui.eval() end)
+map('n', '<laeder>duf', function() dapui.float_element() end)
