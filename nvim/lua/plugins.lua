@@ -1,3 +1,6 @@
+local plugins_list = require 'plugins.plugins_list';
+
+-- Setup Lazy | Package Manager |
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -11,111 +14,15 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
-    {
-        'vim-airline/vim-airline',
-    },
-    {
-        "tiagovla/tokyodark.nvim",
-        opts = {},
-        config = function(_, opts)
-            require("tokyodark").setup(opts) -- calling setup is optional
-            vim.cmd [[colorscheme tokyodark]]
-        end,
-    },
-    {
-        'vim-airline/vim-airline'
-    },
-    {
-        'numToStr/Comment.nvim',
-        config = true,
-        lazy = false
-    },
-    {
-        'nvim-telescope/telescope.nvim',
-        tag = '0.1.3',
-        dependencies = { 'nvim-lua/plenary.nvim' }
-    },
-    {
-        'neovim/nvim-lspconfig',
-    },
-    {
-        'rhysd/git-messenger.vim',
-    },
-    {
-        'hrsh7th/nvim-cmp',
-    },
-    {
-        'hrsh7th/cmp-nvim-lsp',
-    },
-    {
-        "folke/trouble.nvim",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-        opts = {},
-    },
-    {
-        'lervag/vimtex',
-        lazy = false,
-    },
-    {
-        'akinsho/flutter-tools.nvim',
-        lazy = false,
-        dependencies = {
-            'nvim-lua/plenary.nvim',
-            'stevearc/dressing.nvim',
-        },
-        config = true,
-    },
-    {
-        "L3MON4D3/LuaSnip",
-    },
-    {
-        'nvim-tree/nvim-tree.lua'
-    },
-    { 'akinsho/toggleterm.nvim', opts = {} },
-    {
-        "carbon-steel/detour.nvim",
-    },
-    {
-        'SirVer/ultisnips',
-    },
-    {
-        'honza/vim-snippets',
-    },
-    {
-        'mfussenegger/nvim-dap',
-    },
-    {
-        'rcarriga/nvim-dap-ui',
-        dependencies = {
-            'mfussenegger/nvim-dap',
-        }
-    },
-    {
-        "iamcco/markdown-preview.nvim",
-        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-        ft = { "markdown" },
-        build = function() vim.fn["mkdp#util#install"]() end,
-    },
-    {
-        'folke/neodev.nvim',
-    },
-})
+local lazy = require 'lazy';
 
-vim.diagnostic.config {
-    virtual_text = true,
-    signs = true,
-    underline = true,
-    update_in_insert = false,
-    severity_sort = false
-}
+lazy.setup(plugins_list)
 
+-- Plugin setups
 require "toggleterm".setup {}
 require "luasnip.loaders.from_snipmate".lazy_load()
-
--- Only flutter related below
-
-require("flutter-tools").setup {
+require "dapui".setup()
+require "flutter-tools".setup {
     lsp = {
         color = {
             enabled = true,
@@ -127,67 +34,6 @@ require("flutter-tools").setup {
         }
     }
 }
-
-local dap = require('dap')
-
-dap.adapters.dart = {
-    type = 'executable',
-    command = 'dart',
-    args = { 'debug_adapter' }
-}
-
-dap.adapters.flutter = {
-    type = 'executable',
-    command = 'flutter',
-    args = { 'debug_adapter' }
-}
-
-dap.set_log_level('TRACE')
-dap.configurations.dart = {
-    {
-        type = "flutter",
-        request = "launch",
-        name = "Launch Flutter | Development",
-        dartSdkPath = "/Users/wiktor.zajac/fltuter/bin/dart",
-        flutterSdkPath = "/Users/wiktor.zajac/flutter/bin/flutter",
-        program = "${workspaceFolder}/lib/main_development.dart",
-        cwd = "${workspaceFolder}",
-        toolArgs = { "-d", "6C2D48E8-2A78-4F5B-B67C-39A4C50DB24A", "--flavor", "development" }
-    },
-    {
-        type = "flutter",
-        request = "launch",
-        name = "Launch Flutter | Mock",
-        dartSdkPath = "/Users/wiktor.zajac/fltuter/bin/dart",
-        flutterSdkPath = "/Users/wiktor.zajac/flutter/bin/flutter",
-        program = "${workspaceFolder}/lib/main_mock.dart",
-        cwd = "${workspaceFolder}",
-        toolArgs = { "-d", "7029C1E6-5CE5-4A6A-AFF2-80E0AD32D792", "--flavor", "development" }
-    },
-    {
-        type = "flutter",
-        request = "launch",
-        name = "Launch Flutter | Production",
-        dartSdkPath = "/Users/wiktor.zajac/fltuter/bin/dart",
-        flutterSdkPath = "/Users/wiktor.zajac/flutter/bin/flutter",
-        program = "${workspaceFolder}/lib/main_production.dart",
-        cwd = "${workspaceFolder}",
-        toolArgs = { "-d", "7029C1E6-5CE5-4A6A-AFF2-80E0AD32D792", "--flavor", "production" }
-    },
-    {
-        type = "flutter",
-        request = "launch",
-        name = "Launch Flutter | Staging",
-        dartSdkPath = "/Users/wiktor.zajac/fltuter/bin/dart",
-        flutterSdkPath = "/Users/wiktor.zajac/flutter/bin/flutter",
-        program = "${workspaceFolder}/lib/main_staging.dart",
-        cwd = "${workspaceFolder}",
-        toolArgs = { "-d", "70229C1E6-5CE5-4A6A-AFF2-80E0AD32D792", "--flavor", "staging" }
-    }
-}
-
-require("neodev").setup({
+require "neodev".setup({
     library = { plugins = { "nvim-dap-ui" }, types = true },
 })
-
-require('dapui').setup()
