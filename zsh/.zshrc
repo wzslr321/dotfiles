@@ -2,11 +2,16 @@
 eval $(/opt/homebrew/bin/brew shellenv)
 
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 export PATH="/usr/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$PATH:$HOME/flutter/bin"
 export PATH="$HOME/textec:$PATH"
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+export FLUTTER_PATH="$HOME/flutter/bin/flutter"
+export DART_PATH="$HOME/flutter/bin/dart"
+export DEFAULT_FLUTTER_DEVICE="macos"
 
 export DOTFILES="$HOME/dotfiles"
 
@@ -17,13 +22,13 @@ export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
 # Zellij
 export ZELLIJ_CONFIG_DIR="$DOTFILES/zellij/"
 
+source ~/dotfiles/zellij/.zellij.conf
+
 if [[ -z "$ZELLIJ" ]]; then
     zellij attach default
 fi
 
-source ~/dotfiles/zellij/.zellij.conf
 
-# ZSH
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 
@@ -32,10 +37,13 @@ plugins+=(zsh-vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 source <(kubectl completion zsh)
 
 # Aliases
 alias b="cd .."
+alias bb="cd ../.."
+alias bbb="cd ../../.."
 alias cpt="cp $DOTFILES/nvim/templates/main.tex "
 alias cpr="rm src/main.rs && cp $DOTFILES/nvim/templates/rust-template.rs src/main.rs"
 alias cpc="cp $DOTFILES/nvim/templates/cpp-template.cpp main.cpp"

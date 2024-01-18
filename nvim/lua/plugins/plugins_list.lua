@@ -49,15 +49,9 @@ local vimtex = {
     lazy = false,
 };
 
-local lazy = require 'lazy';
-
 local flutter_tools = {
     'akinsho/flutter-tools.nvim',
     lazy = false,
-    dependencies = {
-        'nvim-lua/plenary.nvim',
-        'stevearc/dressing.nvim',
-    },
     config = true,
 };
 
@@ -80,16 +74,11 @@ local ultisnips = { 'SirVer/ultisnips' };
 -- Snippets
 local vim_snippets = { 'honza/vim-snippets' };
 
--- Debugger
+-- debugger
 local nvim_dap = { 'mfussenegger/nvim-dap' };
 
--- Debugger UI
-local nvim_dap_ui = {
-    'rcarriga/nvim-dap-ui',
-    dependencies = {
-        'mfussenegger/nvim-dap',
-    }
-};
+-- debugger ui
+local nvim_dap_ui = { 'rcarriga/nvim-dap-ui' };
 
 local markdown_preview = {
     "iamcco/markdown-preview.nvim",
@@ -99,7 +88,13 @@ local markdown_preview = {
 };
 
 -- Helper for plugin writing
-local neodev = { 'folke/neodev.nvim'};
+local neodev = { 'folke/neodev.nvim' };
+
+-- UI helper
+local dressing = {
+    'stevearc/dressing.nvim',
+    opts = {},
+};
 
 return {
     airline,
@@ -124,4 +119,5 @@ return {
     nvim_dap_ui,
     markdown_preview,
     neodev,
+    dressing,
 }

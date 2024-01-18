@@ -25,6 +25,7 @@ dap.configurations.rust = {
                 end
             end
 
+
             local job_id = vim.fn.jobstart('cargo build -Z unstable-options --build-plan', {
                 stdout_buffered = true,
                 on_stdout = on_stdout,
@@ -70,45 +71,120 @@ dap.adapters.flutter = {
 }
 
 dap.set_log_level('TRACE')
+
+local dart_path = os.getenv("DART_PATH");
+local flutter_path = os.getenv("FLUTTER_PATH");
+
+local get_device = function()
+    local co = coroutine.running()
+    local output = ""
+    local exit_code = 0
+    local on_stdout = function(_, data)
+        if data then
+            for _, line in ipairs(data) do
+                if string.match(line, '•') then
+                    output = output .. line .. '\n'
+                end
+            end
+        end
+    end
+
+    vim.print("Running flutter devices...")
+    local job_id = vim.fn.jobstart('flutter devices', {
+        stdout_buffered = true,
+        on_stdout = on_stdout,
+        on_stderr = on_stdout,
+        on_exit = function(_, code, _)
+            exit_code = code
+        end,
+    })
+    vim.fn.jobwait({ job_id })
+    if exit_code ~= 0 then
+        return vim.print("Failed to retrieve device")
+    end
+
+    vim.ui.select(vim.fn.split(output, '\n'), {
+        prompt = "Select Device",
+        telescope = require 'telescope.themes'.get_cursor(),
+    }, function(selected)
+        coroutine.resume(co, selected)
+    end
+    );
+    local selected_device = coroutine.yield()
+    return vim.fn.trim(vim.fn.split(selected_device, '•')[2])
+end
+
 dap.configurations.dart = {
     {
         type = "flutter",
         request = "launch",
         name = "Launch Flutter | Development",
-        dartSdkPath = "/Users/wiktor.zajac/fltuter/bin/dart",
-        flutterSdkPath = "/Users/wiktor.zajac/flutter/bin/flutter",
+        dartSdkPath = dart_path,
+        flutterSdkPath = flutter_path,
         program = "${workspaceFolder}/lib/main_development.dart",
         cwd = "${workspaceFolder}",
-        toolArgs = { "-d", "6C2D48E8-2A78-4F5B-B67C-39A4C50DB24A", "--flavor", "development" }
+        toolArgs = function()
+            local default_flutter_device = os.getenv("DEFAULT_FLUTTER_DEVICE");
+            local selected_device = default_flutter_device;
+            if not selected_device then
+                selected_device = get_device();
+            end
+
+            return { "-d", selected_device, "--flavor", "development" };
+        end
     },
     {
         type = "flutter",
         request = "launch",
         name = "Launch Flutter | Mock",
-        dartSdkPath = "/Users/wiktor.zajac/fltuter/bin/dart",
-        flutterSdkPath = "/Users/wiktor.zajac/flutter/bin/flutter",
+        dartSdkPath = dart_path,
+        flutterSdkPath = flutter_path,
         program = "${workspaceFolder}/lib/main_mock.dart",
         cwd = "${workspaceFolder}",
-        toolArgs = { "-d", "7029C1E6-5CE5-4A6A-AFF2-80E0AD32D792", "--flavor", "development" }
+        toolArgs = function()
+            local default_flutter_device = os.getenv("DEFAULT_FLUTTER_DEVICE");
+            local selected_device = default_flutter_device;
+            if not selected_device then
+                selected_device = get_device();
+            end
+
+            return { "-d", selected_device, "--flavor", "development" };
+        end
     },
     {
         type = "flutter",
         request = "launch",
         name = "Launch Flutter | Production",
-        dartSdkPath = "/Users/wiktor.zajac/fltuter/bin/dart",
-        flutterSdkPath = "/Users/wiktor.zajac/flutter/bin/flutter",
+        dartSdkPath = dart_path,
+        flutterSdkPath = flutter_path,
         program = "${workspaceFolder}/lib/main_production.dart",
         cwd = "${workspaceFolder}",
-        toolArgs = { "-d", "7029C1E6-5CE5-4A6A-AFF2-80E0AD32D792", "--flavor", "production" }
+        toolArgs = function()
+            local default_flutter_device = os.getenv("DEFAULT_FLUTTER_DEVICE");
+            local selected_device = default_flutter_device;
+            if not selected_device then
+                selected_device = get_device();
+            end
+
+            return { "-d", selected_device, "--flavor", "development" };
+        end
     },
     {
         type = "flutter",
         request = "launch",
         name = "Launch Flutter | Staging",
-        dartSdkPath = "/Users/wiktor.zajac/fltuter/bin/dart",
-        flutterSdkPath = "/Users/wiktor.zajac/flutter/bin/flutter",
+        dartSdkPath = dart_path,
+        flutterSdkPath = flutter_path,
         program = "${workspaceFolder}/lib/main_staging.dart",
         cwd = "${workspaceFolder}",
-        toolArgs = { "-d", "70229C1E6-5CE5-4A6A-AFF2-80E0AD32D792", "--flavor", "staging" }
+        toolArgs = function()
+            local default_flutter_device = os.getenv("DEFAULT_FLUTTER_DEVICE");
+            local selected_device = default_flutter_device;
+            if not selected_device then
+                selected_device = get_device();
+            end
+
+            return { "-d", selected_device, "--flavor", "development" };
+        end
     }
 }

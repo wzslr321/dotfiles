@@ -1,8 +1,3 @@
-vim.g.mapleader = ' ';
-
--- helpers
-vim.api.nvim_create_user_command('Fmt', function() vim.lsp.buf.format() end, { nargs = 0 })
-
 local function map(mode, key, action, options)
     local opts = { noremap = true, silent = true }
     if (options) then
@@ -49,7 +44,6 @@ map("n", "<leader>xq", function() trouble.open("quickfix") end)
 map("n", "<leader>xl", function() trouble.open("loclist") end)
 map("n", "gr", function() trouble.open("lsp_references") end)
 
-
 -- Splits
 map('n', '<space>rh>', ':vertical resize -5<CR>')
 map('n', '<space>rl', ':vertical resize +5<CR>')
@@ -79,4 +73,5 @@ map('n', '<leader>fh', function() telescope.help_tags() end)
 local dapui = require 'dapui';
 map('n', '<leader>dut', function() dapui.toggle() end)
 map('n', '<leader>due', function() dapui.eval() end)
+---@diagnostic disable-next-line: missing-parameter
 map('n', '<leader>duf', function() dapui.float_element() end)
