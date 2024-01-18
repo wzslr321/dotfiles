@@ -22,6 +22,8 @@ set laststatus=2
 " display column & row number
 set ruler 
 
+highlight MatchParen guifg=#00FFFF guibg=#000000
+highlight MatchParen ctermfg=10 ctermbg=NONE
 
 " config for vim-tex plugin
 let g:tex_flavor='latex'

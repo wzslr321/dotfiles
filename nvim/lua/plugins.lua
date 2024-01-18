@@ -40,6 +40,9 @@ require("lazy").setup({
         'neovim/nvim-lspconfig',
     },
     {
+        'rhysd/git-messenger.vim',
+    },
+    {
         'hrsh7th/nvim-cmp',
     },
     {
@@ -149,7 +152,7 @@ dap.configurations.dart = {
         flutterSdkPath = "/Users/wiktor.zajac/flutter/bin/flutter",
         program = "${workspaceFolder}/lib/main_development.dart",
         cwd = "${workspaceFolder}",
-        toolArgs = { "-d", "7029C1E6-5CE5-4A6A-AFF2-80E0AD32D792", "--flavor", "development" }
+        toolArgs = { "-d", "6C2D48E8-2A78-4F5B-B67C-39A4C50DB24A", "--flavor", "development" }
     },
     {
         type = "flutter",
