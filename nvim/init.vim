@@ -1,10 +1,10 @@
+lua require('init')
 lua require('plugins')
 lua require('lsp')
 lua require('plugins/nvim-cmp')
 lua require('plugins/nvim-dap')
 lua require('plugins/nvim-tree')
 lua require('keymappings')
-lua require('init')
 
 " https://vi.stackexchange.com/a/10125
 filetype plugin indent on
@@ -22,6 +22,8 @@ set laststatus=2
 " display column & row number
 set ruler 
 
+highlight MatchParen guifg=#00FFFF guibg=#000000
+highlight MatchParen ctermfg=10 ctermbg=NONE
 
 " config for vim-tex plugin
 let g:tex_flavor='latex'
@@ -41,9 +43,6 @@ let g:vimtex_compiler_latexmk = {
 
 let maplocalleader = "'"
 
-colorscheme tokyonight-night
-
-" TODO figure out why I did this
 :tnoremap <Esc> <C-\><C-n> 
 
 " set to 1 when coding in haskell, as it detects unnecessary whitespace
