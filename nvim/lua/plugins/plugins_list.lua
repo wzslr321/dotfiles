@@ -1,15 +1,24 @@
 -- Configurable status line
-local airline = { 'vim-airline/vim-airline' };
+-- local airline = { 'vim-airline/vim-airline' };
+local galaxyline = { 'glepnir/galaxyline.nvim' };
 
 -- The best theme there is.
-local tokyodark_theme = {
-    "tiagovla/tokyodark.nvim",
-    opts = {},
+-- local tokyodark_theme = {
+--     "tiagovla/tokyodark.nvim",
+--     opts = {},
+--     config = function(_, opts)
+--         require("tokyodark").setup(opts)
+--         vim.cmd [[colorscheme tokyodark]]
+--     end,
+-- };
+
+local nightfox_theme = {
+    'EdenEast/nightfox.nvim',
     config = function(_, opts)
-        require("tokyodark").setup(opts)
-        vim.cmd [[colorscheme tokyodark]]
+        require("nightfox").setup(opts)
+        vim.cmd [[colorscheme nightfox]]
     end,
-};
+}
 
 -- Allows to comment out blocks of code
 local comment = {
@@ -96,9 +105,34 @@ local dressing = {
     opts = {},
 };
 
+local indent_line = {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {}
+}
+
+local treesiter = {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate"
+}
+local treesiter_context = {
+    'nvim-treesitter/nvim-treesitter-context'
+}
+
+local barbar = {
+    'romgrk/barbar.nvim',
+    dependencies = {
+        'lewis6991/gitsigns.nvim',
+    },
+    init = function() vim.g.barbar_auto_setup = false end,
+}
+
+
 return {
-    airline,
-    tokyodark_theme,
+    --airline,
+    -- tokyodark_theme,
+    galaxyline,
+    nightfox_theme,
     comment,
     plenary,
     telescope,
@@ -120,4 +154,8 @@ return {
     markdown_preview,
     neodev,
     dressing,
+    treesiter,
+    indent_line,
+    treesiter_context,
+    barbar,
 }
