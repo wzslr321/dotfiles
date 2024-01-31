@@ -5,9 +5,10 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 export PATH="/usr/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
-export PATH="$PATH:$HOME/flutter/bin"
+export PATH=$HOME/development/flutter/bin:$PATH
 export PATH="$HOME/textec:$PATH"
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
 
 export FLUTTER_PATH="$HOME/flutter/bin/flutter"
 export DART_PATH="$HOME/flutter/bin/dart"
@@ -37,8 +38,6 @@ plugins+=(zsh-vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-source <(kubectl completion zsh)
 
 # Aliases
 alias b="cd .."

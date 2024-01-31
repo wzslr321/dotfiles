@@ -25,6 +25,7 @@
 - Editor: [Neovim](https://neovim.io)
 - File Manager: [yazi](https://github.com/sxyazi/yazi)
 - Shell: Zsh ([OhMyZsh](https://github.com/ohmyzsh/ohmyzsh))
+- Font: [CaskaydiaCove Nerd font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/CascadiaCode)
 - Terminal Workspace: [Zellij](https://zellij.dev)
 - Git: [Lazygit](https://github.com/jesseduffield/lazygit)
 
