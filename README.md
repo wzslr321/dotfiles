@@ -16,7 +16,7 @@
 
 </br>
 
-<img width="1904" alt="Screenshot 2024-01-19 at 17 37 59" src="https://github.com/wzslr321/dotfiles/assets/59893892/9b3c7e5a-0f9d-4359-a82f-07634ae2ea6c">
+<img width="1919" alt="Screenshot 2024-01-31 at 18 56 21" src="https://github.com/wzslr321/dotfiles/assets/59893892/502ee2f5-9489-4463-b4cc-6cdad4bcfb66">
 
 ### What do I use?
 
@@ -32,3 +32,14 @@
 
 ### For some detailed information, you can check out my post 
 [My environment setup for Flutter development](https://wiktorzajac.me/posts/flutter-nvim/)
+
+
+---
+
+Kudos to [Vallen217](https://github.com/Vallen217/dotfiles) for an awesome wallpaper!
+
+---
+
+<img width="1904" alt="Screenshot 2024-01-31 at 19 03 17" src="https://github.com/wzslr321/dotfiles/assets/59893892/f643d99a-c324-4d94-b143-faeb97aca8b1">
+<img width="1910" alt="Screenshot 2024-01-31 at 18 59 15" src="https://github.com/wzslr321/dotfiles/assets/59893892/92937540-462c-4cae-9290-5ba279fa8222">
+
