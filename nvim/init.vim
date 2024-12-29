@@ -4,6 +4,7 @@ lua require('lsp')
 lua require('plugins/nvim-cmp')
 lua require('plugins/nvim-dap')
 lua require('plugins/nvim-tree')
+lua require('plugins/galaxyline')
 lua require('keymappings')
 
 " https://vi.stackexchange.com/a/10125
