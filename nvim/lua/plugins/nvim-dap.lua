@@ -5,7 +5,7 @@ dap.set_log_level('TRACE')
 -- Rust
 dap.adapters.lldb = {
     type = 'executable',
-    command = '/opt/homebrew/bin/lldb-vscode',
+    command = '/opt/homebrew/opt/llvm/bin/lldb-dap',
     name = 'lldb'
 }
 
@@ -121,25 +121,25 @@ dap.configurations.dart = {
         name = "Launch Flutter | Development",
         dartSdkPath = dart_path,
         flutterSdkPath = flutter_path,
-        program = "${workspaceFolder}/lib/main_development.dart",
+        program = "${workspaceFolder}/lib/main_dev.dart",
         cwd = "${workspaceFolder}",
         toolArgs = function()
-            local default_flutter_device = os.getenv("DEFAULT_FLUTTER_DEVICE");
-            local selected_device = default_flutter_device;
-            if not selected_device then
-                selected_device = get_device();
-            end
+            -- local default_flutter_device = os.getenv("DEFAULT_FLUTTER_DEVICE");
+            -- local selected_device = default_flutter_device;
+            -- if not selected_device then
+            local selected_device = get_device();
+            -- end
 
-            return { "-d", selected_device, "--flavor", "development" };
+            return { "-d", selected_device, "--flavor", "dev"};
         end
     },
     {
         type = "flutter",
         request = "launch",
-        name = "Launch Flutter | Mock",
+        name = "Launch Flutter | Local",
         dartSdkPath = dart_path,
         flutterSdkPath = flutter_path,
-        program = "${workspaceFolder}/lib/main_mock.dart",
+        program = "${workspaceFolder}/lib/main_local.dart",
         cwd = "${workspaceFolder}",
         toolArgs = function()
             local default_flutter_device = os.getenv("DEFAULT_FLUTTER_DEVICE");
@@ -148,7 +148,7 @@ dap.configurations.dart = {
                 selected_device = get_device();
             end
 
-            return { "-d", selected_device, "--flavor", "development" };
+            return { "-d", selected_device, "--flavor", "dev" };
         end
     },
     {
