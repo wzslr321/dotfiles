@@ -39,6 +39,3 @@ require "neodev".setup({
 })
 
 require("dressing").setup()
-require("ibl").setup()
-require("barbar").setup()
-require 'plugins.galaxyline'

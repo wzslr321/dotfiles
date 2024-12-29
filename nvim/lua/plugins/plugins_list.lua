@@ -1,22 +1,11 @@
 -- Configurable status line
--- local airline = { 'vim-airline/vim-airline' };
 local galaxyline = { 'glepnir/galaxyline.nvim' };
 
--- The best theme there is.
--- local tokyodark_theme = {
---     "tiagovla/tokyodark.nvim",
---     opts = {},
---     config = function(_, opts)
---         require("tokyodark").setup(opts)
---         vim.cmd [[colorscheme tokyodark]]
---     end,
--- };
-
-local nightfox_theme = {
-    'EdenEast/nightfox.nvim',
+local tokyodark = {
+    "tiagovla/tokyodark.nvim",
     config = function(_, opts)
-        require("nightfox").setup(opts)
-        vim.cmd [[colorscheme nightfox]]
+        require("tokyodark").setup(opts)
+        vim.cmd [[colorscheme tokyodark]]
     end,
 }
 
@@ -89,13 +78,6 @@ local nvim_dap = { 'mfussenegger/nvim-dap' };
 -- debugger ui
 local nvim_dap_ui = { 'rcarriga/nvim-dap-ui' };
 
-local markdown_preview = {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = function() vim.fn["mkdp#util#install"]() end,
-};
-
 -- Helper for plugin writing
 local neodev = { 'folke/neodev.nvim' };
 
@@ -105,34 +87,34 @@ local dressing = {
     opts = {},
 };
 
-local indent_line = {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
+local todo_comments = {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
     opts = {}
 }
 
-local treesiter = {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate"
-}
-local treesiter_context = {
-    'nvim-treesitter/nvim-treesitter-context'
-}
-
-local barbar = {
-    'romgrk/barbar.nvim',
-    dependencies = {
-        'lewis6991/gitsigns.nvim',
+local which_key = {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {},
+    keys = {
+        {
+            "<leader>?",
+            function()
+                require("which-key").show({ global = false })
+            end,
+            desc = "Buffer Local Keymaps (which-key)",
+        },
     },
-    init = function() vim.g.barbar_auto_setup = false end,
 }
 
+local nvim_nio = {
+    'nvim-neotest/nvim-nio'
+}
 
 return {
-    --airline,
-    -- tokyodark_theme,
     galaxyline,
-    nightfox_theme,
+    tokyodark,
     comment,
     plenary,
     telescope,
@@ -151,11 +133,9 @@ return {
     vim_snippets,
     nvim_dap,
     nvim_dap_ui,
-    markdown_preview,
     neodev,
     dressing,
-    treesiter,
-    indent_line,
-    treesiter_context,
-    barbar,
+    todo_comments,
+    which_key,
+    nvim_nio,
 }

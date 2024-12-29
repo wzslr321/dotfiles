@@ -38,7 +38,7 @@ map('n', '<leader>e', ':NvimTreeToggle<CR>')
 -- Trouble
 local trouble = require 'trouble'
 map('n', '<leader>xa', ':TroubleToggle<CR>')
-map("n", "<leader>xw", function() trouble.open("workspace_diagnostics") end)
+map("n", "<leader>xw", function() trouble.open("diagnostics") end)
 map("n", "<leader>xd", function() trouble.open("document_diagnostics") end)
 map("n", "<leader>xq", function() trouble.open("quickfix") end)
 map("n", "<leader>xl", function() trouble.open("loclist") end)
