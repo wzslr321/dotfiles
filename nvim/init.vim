@@ -5,6 +5,7 @@ lua require('plugins/nvim-cmp')
 lua require('plugins/nvim-dap')
 lua require('plugins/nvim-tree')
 lua require('plugins/galaxyline')
+lua require('plugins/avante')
 lua require('keymappings')
 
 " https://vi.stackexchange.com/a/10125
@@ -55,3 +56,6 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
  
 let g:use_clangd = 1
+
+let g:gruvbox_material_foreground="mix"
+set wildignore+=*/node_modules/*,*/.git/*,*/dist/*

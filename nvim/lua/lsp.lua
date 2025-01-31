@@ -18,16 +18,13 @@ lspconfig.lua_ls.setup {
 lspconfig.digestif.setup {}
 
 
-local clangd_command = {
-    'clangd',
-    '--query-driver=/usr/bin/g++',
-}
-
 -- cpp
 lspconfig.clangd.setup {
-    cmd = clangd_command
+    cmd = { "/opt/homebrew/Cellar/llvm/19.1.7/bin/clangd"},
+  root_dir = function()
+    return vim.fn.getcwd() -- or specify a specific path
+  end
 }
-
 
 -- https://github.com/pr2502/ra-multiplex
 lspconfig.rust_analyzer.setup {

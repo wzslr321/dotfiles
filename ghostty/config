@@ -722,7 +722,7 @@ mouse-scroll-multiplier = 1
 # The opacity level (opposite of transparency) of the background. A value of
 # 1 is fully opaque and a value of 0 is fully transparent. A value less than 0
 # or greater than 1 will be clamped to the nearest valid value.
-background-opacity = 1
+background-opacity = 0.85
 
 # A positive value enables blurring of the background when background-opacity
 # is less than 1. The value is the blur radius to apply. A value of 20
@@ -1215,7 +1215,10 @@ window-inherit-font-size = true
 # 
 # macOS: To hide the titlebar without removing the native window borders
 #        or rounded corners, use `macos-titlebar-style = hidden` instead.
-window-decoration = true
+# window-decoration = false 
+macos-titlebar-style = hidden
+# macos-titlebar-proxy-icon = hidden
+# title = " "
 
 # The font that will be used for the application's window and tab titles.
 # 

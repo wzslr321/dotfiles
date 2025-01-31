@@ -21,14 +21,16 @@ export PATH=$JAVA_HOME/bin:$PATH
 export PATH="$ANDROID_HOME/platform-tools:$PATH"
 export ANDROID_HOME=~/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
-export PATH="$HOME/development/flutter/bin:$PATH"
+# export PATH="$HOME/development/flutter/bin:$PATH"
 
 # University 
 export JAVA_HOME="$HOME/Library/Java/JavaVirtualMachines/corretto-1.8.0_432/Contents/Home"
 
+export CC=/opt/homebrew/Cellar/llvm/19.1.5/bin/clang
+export CXX=/opt/homebrew/Cellar/llvm/19.1.5/bin/clang++
 
-export FLUTTER_PATH="$HOME/fvm/versions/3.22.2/bin/flutter"
-export DART_PATH="$HOME/fvm/versions/3.22.2/bin/dart"
+export FLUTTER_PATH="$HOME/fvm/versions/3.27.3/bin/flutter"
+export DART_PATH="$HOME/fvm/versions/3.27.3/bin/dart"
 
 export DOTFILES="$HOME/dotfiles"
 

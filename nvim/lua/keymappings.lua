@@ -75,3 +75,5 @@ map('n', '<leader>dut', function() dapui.toggle() end)
 map('n', '<leader>due', function() dapui.eval() end)
 ---@diagnostic disable-next-line: missing-parameter
 map('n', '<leader>duf', function() dapui.float_element() end)
+
+vim.keymap.set('n', '<Esc>', '<NOP>', { buffer = true }) -- Disables Esc in AvanteAsk
