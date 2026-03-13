@@ -1,24 +1,115 @@
 -- Configurable status line
--- local airline = { 'vim-airline/vim-airline' };
 local galaxyline = { 'glepnir/galaxyline.nvim' };
 
--- The best theme there is.
--- local tokyodark_theme = {
---     "tiagovla/tokyodark.nvim",
---     opts = {},
---     config = function(_, opts)
---         require("tokyodark").setup(opts)
---         vim.cmd [[colorscheme tokyodark]]
---     end,
--- };
+local cmake = { 'Civitasv/cmake-tools.nvim'}
 
-local nightfox_theme = {
-    'EdenEast/nightfox.nvim',
+local tokyodark = {
+    "tiagovla/tokyodark.nvim",
     config = function(_, opts)
-        require("nightfox").setup(opts)
-        vim.cmd [[colorscheme nightfox]]
+        require("tokyodark").setup(opts)
+        vim.cmd [[colorscheme tokyodark]]
     end,
 }
+
+local darkbox = {
+  "timmypidashev/darkbox.nvim",
+  lazy = false,
+  config = function()
+    require("darkbox").load()
+  end
+}
+--
+-- TypeScript tools and React support
+local typescript_tools = {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
+}
+
+-- Maintained formatter runner with CLI fallback support
+local conform = {
+    "stevearc/conform.nvim",
+    opts = {
+        notify_on_error = false,
+        formatters_by_ft = {
+            c = { "clang-format" },
+            cpp = { "clang-format" },
+            css = { "prettierd", "prettier", stop_after_first = true },
+            dart = { "dart_format" },
+            html = { "prettierd", "prettier", stop_after_first = true },
+            javascript = { "prettierd", "prettier", stop_after_first = true },
+            javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+            json = { "prettierd", "prettier", stop_after_first = true },
+            jsonc = { "prettierd", "prettier", stop_after_first = true },
+            lua = { "stylua" },
+            markdown = { "prettierd", "prettier", stop_after_first = true },
+            rust = { "rustfmt" },
+            typescript = { "prettierd", "prettier", stop_after_first = true },
+            typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+            yaml = { "prettierd", "prettier", stop_after_first = true },
+        },
+    },
+}
+
+-- React snippets
+local friendly_snippets = {
+    "rafamadriz/friendly-snippets",
+    dependencies = {
+        "L3MON4D3/LuaSnip",
+    },
+}
+
+local just = { 'NoahTheDuke/vim-just' } 
+
+local avante = {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+    opts = {
+        -- provider = "openai"
+    },
+    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    build = "make",
+    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+    dependencies = {
+        "stevearc/dressing.nvim",
+        "nvim-lua/plenary.nvim",
+        "MunifTanjim/nui.nvim",
+        --- The below dependencies are optional,
+        "echasnovski/mini.pick",     -- for file_selector provider mini.pick
+        "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+        "hrsh7th/nvim-cmp",          -- autocompletion for avante commands and mentions
+        "ibhagwan/fzf-lua",          -- for file_selector provider fzf
+        "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+        "zbirenbaum/copilot.lua",    -- for providers='copilot'
+        {
+            -- support for image pasting
+            "HakonHarnes/img-clip.nvim",
+            event = "VeryLazy",
+            opts = {
+                -- recommended settings
+                default = {
+                    embed_image_as_base64 = false,
+                    prompt_for_file_name = false,
+                    drag_and_drop = {
+                        insert_mode = true,
+                    },
+                    -- required for Windows users
+                    use_absolute_path = true,
+                },
+            },
+        },
+        {
+            -- Make sure to set this up properly if you have lazy=true
+            'MeanderingProgrammer/render-markdown.nvim',
+            opts = {
+                file_types = { "markdown", "Avante" },
+            },
+            ft = { "markdown", "Avante" },
+        },
+    },
+}
+
 
 -- Allows to comment out blocks of code
 local comment = {
@@ -89,15 +180,16 @@ local nvim_dap = { 'mfussenegger/nvim-dap' };
 -- debugger ui
 local nvim_dap_ui = { 'rcarriga/nvim-dap-ui' };
 
-local markdown_preview = {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = function() vim.fn["mkdp#util#install"]() end,
-};
-
--- Helper for plugin writing
-local neodev = { 'folke/neodev.nvim' };
+-- Modern LuaLS helper for Neovim config files
+local lazydev = {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+        library = {
+            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        },
+    },
+}
 
 -- UI helper
 local dressing = {
@@ -105,34 +197,41 @@ local dressing = {
     opts = {},
 };
 
-local indent_line = {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
+local todo_comments = {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
     opts = {}
 }
 
-local treesiter = {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate"
-}
-local treesiter_context = {
-    'nvim-treesitter/nvim-treesitter-context'
-}
-
-local barbar = {
-    'romgrk/barbar.nvim',
-    dependencies = {
-        'lewis6991/gitsigns.nvim',
+local which_key = {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {},
+    keys = {
+        {
+            "<leader>?",
+            function()
+                require("which-key").show({ global = false })
+            end,
+            desc = "Buffer Local Keymaps (which-key)",
+        },
     },
-    init = function() vim.g.barbar_auto_setup = false end,
 }
 
+local nvim_nio = {
+    'nvim-neotest/nvim-nio'
+}
 
 return {
-    --airline,
-    -- tokyodark_theme,
+    avante,
+    cmake,
+    typescript_tools,
+    just,
+    conform,
+    friendly_snippets,
     galaxyline,
-    nightfox_theme,
+    tokyodark,
+    -- darkbox,
     comment,
     plenary,
     telescope,
@@ -151,11 +250,9 @@ return {
     vim_snippets,
     nvim_dap,
     nvim_dap_ui,
-    markdown_preview,
-    neodev,
+    lazydev,
     dressing,
-    treesiter,
-    indent_line,
-    treesiter_context,
-    barbar,
+    todo_comments,
+    which_key,
+    nvim_nio,
 }

@@ -223,6 +223,12 @@ simplified_ui true
 //
 pane_frames false 
 
+layout {
+    tab-bar {
+        hide true
+    }
+}
+
 // Toggle between having Zellij lay out panes according to a predefined set of layouts whenever possible
 // Options:
 //   - true (default)

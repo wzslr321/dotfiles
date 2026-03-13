@@ -14,4 +14,12 @@ vim.diagnostic.config {
 
 vim.g.mapleader = ' ';
 
-vim.api.nvim_create_user_command('Fmt', function() vim.lsp.buf.format() end, { nargs = 0 })
+vim.api.nvim_create_user_command('Fmt', function()
+    local ok, conform = pcall(require, 'conform')
+    if ok then
+        conform.format({ async = true, lsp_format = "fallback" })
+        return
+    end
+
+    vim.lsp.buf.format({ async = true })
+end, { nargs = 0 })

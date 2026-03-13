@@ -1,34 +1,56 @@
-# Some random stuff  
 eval $(/opt/homebrew/bin/brew shellenv)
 
+
+# Retrieve private keys that can not be stored on github, e.g. GH Token
+if [ -f ~/.zshenv.local ]; then
+    source ~/.zshenv.local
+fi
+
+export OLLAMA_DEBUG=1
+
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="/usr/local/texlive/2023/bin/universal-darwin:$PATH"
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 export PATH="/usr/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
-export PATH=$HOME/development/flutter/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/fvm/default/bin:$PATH"
 export PATH="$HOME/textec:$PATH"
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export PATH="$HOME/.dotnet:$PATH"
+export PATH="$PATH:/Users/creatix/.dotnet/tools"
+export DOTNET_ROOT="$HOME/.dotnet"
+export PATH=$JAVA_HOME/bin:$PATH
+export PATH="$ANDROID_HOME/platform-tools:$PATH"
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
+export PATH="$HOME/development/flutter/bin:$PATH"
+export PATH="/Library/TeX/texbin:$PATH"
+export PATH="$HOME/Library/Python/3.9/bin:$PATH"
+# export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
+export JAVA_HOME=$(/usr/libexec/java_home -v17)
+
+# University 
+# export JAVA_HOME="$HOME/Library/Java/JavaVirtualMachines/openjdk-24/Contents/Home"
+# export JAVA_HOME="$HOME/Library/Java/JavaVirtualMachines/corretto-1.8.0_432/Contents/Home"
 
 
-export FLUTTER_PATH="$HOME/flutter/bin/flutter"
-export DART_PATH="$HOME/flutter/bin/dart"
-export DEFAULT_FLUTTER_DEVICE="macos"
+export FLUTTER_PATH="$HOME/fvm/versions/3.27.3/bin/flutter"
+export DART_PATH="$HOME/fvm/versions/3.27.3/bin/dart"
 
 export DOTFILES="$HOME/dotfiles"
 
 # C++ 
 export LDFLAGS="-L/opt/homebrew/opt/llvm/lib/c++ -Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++"
 export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
+export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include"
+#export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+#export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
 # Zellij
 export ZELLIJ_CONFIG_DIR="$DOTFILES/zellij/"
 
 source ~/dotfiles/zellij/.zellij.conf
-
-if [[ -z "$ZELLIJ" ]]; then
-    zellij attach default
-fi
-
 
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
@@ -52,10 +74,13 @@ alias cr="./out/main"
 alias cmpa="as -o main.o main.s && /usr/bin/clang -o main main.o -e _start -arch arm64"
 alias cmpos="cargo +nightly run -Z build-std=core,compiler_builtins --target x86_64-blog_os.json build-std-features=compiler-builtins-mem"
 alias c="clear"
-
-# gcloud
-if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/path.zsh.inc'; fi
-if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
+alias cmpr="cmps && ./out/main"
+alias rundev="flutter run lib/main_dev.dart --target dev"
+alias lf="~/development/flutter/bin/flutter"
+alias ld="~/development/flutter/bin/dart"
+alias flutter="fvm flutter"
+alias pip="pip3"
+alias python="python3"
 
 # Haskell
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" 
@@ -76,3 +101,33 @@ nps() {
     mkdir "$1" && cd "$1" && cpc && mkdir out
 }
 
+# Atuin | shell history
+# https://github.com/atuinsh/atuin
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /Users/creatix/.dart-cli-completion/zsh-config.zsh ]] && . /Users/creatix/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
+export DOTNET_ROOT=/usr/local/share/dotnet
+# export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+# export PATH="$(ruby -r rubygems -e 'puts Gem.bindir'):$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - zsh)"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - zsh)"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - zsh)"
+
+# CocoaPods requires UTF-8 encoding
+export LANG=en_US.UTF-8
+
+# Add gem bin directory to PATH for CocoaPods
+export PATH="$HOME/.gem/ruby/3.2.0/bin:$PATH"

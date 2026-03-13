@@ -13,3 +13,5 @@ lua/.luarc.json
 
 cheatsheet/
 templates/
+
+zsh/.zshrc.local

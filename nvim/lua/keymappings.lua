@@ -1,7 +1,7 @@
 local function map(mode, key, action, options)
     local opts = { noremap = true, silent = true }
     if (options) then
-        opts = options
+        opts = vim.tbl_extend('force', opts, options)
     end
     return vim.keymap.set(mode, key, action, opts)
 end
@@ -9,7 +9,7 @@ end
 map('n', '<leader>df', ':!dart format -l 120 %<CR>')
 
 -- Lsp
-map('n', '<leader>ff', ':Fmt<CR>')
+map('n', '<leader>cf', '<cmd>Fmt<CR>')
 map('n', '<space>gl', vim.diagnostic.open_float)
 map('n', '[d', vim.diagnostic.goto_prev)
 map('n', ']d', vim.diagnostic.goto_next)
@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         map('n', '<space>D', vim.lsp.buf.type_definition, opts)
         map('n', '<space>rn', vim.lsp.buf.rename, opts)
         map({ 'n', 'v' }, '<space>a', vim.lsp.buf.code_action, opts)
-        map('n', '<space>f', function() vim.lsp.buf.format { async = true } end, opts)
+        map('n', '<space>f', '<cmd>Fmt<CR>', opts)
     end,
 })
 
@@ -37,11 +37,13 @@ map('n', '<leader>e', ':NvimTreeToggle<CR>')
 
 -- Trouble
 local trouble = require 'trouble'
-map('n', '<leader>xa', ':TroubleToggle<CR>')
-map("n", "<leader>xw", function() trouble.open("workspace_diagnostics") end)
-map("n", "<leader>xd", function() trouble.open("document_diagnostics") end)
-map("n", "<leader>xq", function() trouble.open("quickfix") end)
-map("n", "<leader>xl", function() trouble.open("loclist") end)
+map('n', '<leader>xa', function() trouble.toggle("diagnostics") end)
+map("n", "<leader>xw", function() trouble.open("diagnostics") end)
+map("n", "<leader>xd", function()
+    trouble.toggle({ mode = "diagnostics", filter = { buf = 0 } })
+end)
+map("n", "<leader>xq", function() trouble.toggle("qflist") end)
+map("n", "<leader>xl", function() trouble.toggle("loclist") end)
 map("n", "gr", function() trouble.open("lsp_references") end)
 
 -- Splits
