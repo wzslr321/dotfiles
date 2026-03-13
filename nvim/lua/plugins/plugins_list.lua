@@ -6,9 +6,17 @@ local cmake = { 'Civitasv/cmake-tools.nvim'}
 local tokyodark = {
     "tiagovla/tokyodark.nvim",
     config = function(_, opts)
-        require("tokyodark").setup(opts) -- calling setup is optional
+        require("tokyodark").setup(opts)
         vim.cmd [[colorscheme tokyodark]]
     end,
+}
+
+local darkbox = {
+  "timmypidashev/darkbox.nvim",
+  lazy = false,
+  config = function()
+    require("darkbox").load()
+  end
 }
 --
 -- TypeScript tools and React support
@@ -18,12 +26,28 @@ local typescript_tools = {
     opts = {},
 }
 
--- Prettier formatting
-local prettier = {
-    'MunifTanjim/prettier.nvim',
-    dependencies = {
-        'neovim/nvim-lspconfig',
-        'jose-elias-alvarez/null-ls.nvim',
+-- Maintained formatter runner with CLI fallback support
+local conform = {
+    "stevearc/conform.nvim",
+    opts = {
+        notify_on_error = false,
+        formatters_by_ft = {
+            c = { "clang-format" },
+            cpp = { "clang-format" },
+            css = { "prettierd", "prettier", stop_after_first = true },
+            dart = { "dart_format" },
+            html = { "prettierd", "prettier", stop_after_first = true },
+            javascript = { "prettierd", "prettier", stop_after_first = true },
+            javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+            json = { "prettierd", "prettier", stop_after_first = true },
+            jsonc = { "prettierd", "prettier", stop_after_first = true },
+            lua = { "stylua" },
+            markdown = { "prettierd", "prettier", stop_after_first = true },
+            rust = { "rustfmt" },
+            typescript = { "prettierd", "prettier", stop_after_first = true },
+            typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+            yaml = { "prettierd", "prettier", stop_after_first = true },
+        },
     },
 }
 
@@ -40,7 +64,6 @@ local just = { 'NoahTheDuke/vim-just' }
 local avante = {
     "yetone/avante.nvim",
     event = "VeryLazy",
-    lazy = false,
     version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
     opts = {
         -- provider = "openai"
@@ -157,8 +180,16 @@ local nvim_dap = { 'mfussenegger/nvim-dap' };
 -- debugger ui
 local nvim_dap_ui = { 'rcarriga/nvim-dap-ui' };
 
--- Helper for plugin writing
-local neodev = { 'folke/neodev.nvim' };
+-- Modern LuaLS helper for Neovim config files
+local lazydev = {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+        library = {
+            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        },
+    },
+}
 
 -- UI helper
 local dressing = {
@@ -196,10 +227,11 @@ return {
     cmake,
     typescript_tools,
     just,
-    prettier,
+    conform,
     friendly_snippets,
     galaxyline,
     tokyodark,
+    -- darkbox,
     comment,
     plenary,
     telescope,
@@ -218,7 +250,7 @@ return {
     vim_snippets,
     nvim_dap,
     nvim_dap_ui,
-    neodev,
+    lazydev,
     dressing,
     todo_comments,
     which_key,

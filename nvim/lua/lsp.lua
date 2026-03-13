@@ -1,33 +1,45 @@
-local capabs = vim.lsp.protocol.make_client_capabilities()
-capabs = require('cmp_nvim_lsp').default_capabilities(capabs)
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local lspconfig = require 'lspconfig'
 
+local function with_capabilities(config)
+    return vim.tbl_deep_extend('force', {
+        capabilities = capabilities,
+    }, config or {})
+end
+
 -- lua
-lspconfig.lua_ls.setup {
+lspconfig.lua_ls.setup(with_capabilities {
     settings = {
         Lua = {
             diagnostics = {
                 globals = { 'vim' },
             },
+            workspace = {
+                checkThirdParty = false,
+            },
         },
     },
-}
+})
 
 -- latex
-lspconfig.digestif.setup {}
+lspconfig.digestif.setup(with_capabilities())
 
 
--- cpp
-lspconfig.clangd.setup {
-    cmd = { "/opt/homebrew/Cellar/llvm/19.1.7/bin/clangd"},
-  root_dir = function()
-    return vim.fn.getcwd() -- or specify a specific path
-  end
+local clangd_command = {
+    'clangd',
+    '--query-driver=/opt/homebrew/opt/llvm/bin/clang++'
 }
 
+-- cpp
+lspconfig.clangd.setup(with_capabilities {
+    cmd = clangd_command
+})
+
+
 -- https://github.com/pr2502/ra-multiplex
-lspconfig.rust_analyzer.setup {
+lspconfig.rust_analyzer.setup(with_capabilities {
     cmd = vim.lsp.rpc.connect("127.0.0.1", 27631),
     init_options = {
         lspMux = {
@@ -36,6 +48,6 @@ lspconfig.rust_analyzer.setup {
             server = "rust-analyzer",
         },
     },
-}
+})
 
-lspconfig.yamlls.setup {}
+lspconfig.yamlls.setup(with_capabilities())
