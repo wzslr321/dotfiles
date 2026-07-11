@@ -1,0 +1,63 @@
+add_newline = false
+command_timeout = 900
+
+format = "$directory$git_branch$git_status$python$nodejs$package$cmd_duration$line_break$character"
+palette = "lean_night"
+
+[palettes.lean_night]
+bg = "#1f2335"
+fg = "#c0caf5"
+muted = "#565f89"
+blue = "#7aa2f7"
+cyan = "#7dcfff"
+green = "#9ece6a"
+yellow = "#e0af68"
+orange = "#ff9e64"
+red = "#f7768e"
+purple = "#bb9af7"
+
+[character]
+success_symbol = "[›](bold blue)"
+error_symbol = "[›](bold red)"
+vimcmd_symbol = "[‹](bold purple)"
+
+[directory]
+style = "bold blue"
+truncation_length = 4
+truncate_to_repo = false
+read_only = " ro"
+
+[git_branch]
+format = " [$symbol$branch]($style)"
+symbol = "git:"
+style = "purple"
+
+[git_status]
+format = " [$all_status$ahead_behind]($style)"
+style = "yellow"
+conflicted = "="
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "?${count}"
+stashed = "$${count}"
+modified = "!${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "x${count}"
+
+[python]
+format = " [py $version( $virtualenv)]($style)"
+style = "green"
+
+[nodejs]
+format = " [node $version]($style)"
+style = "green"
+
+[package]
+disabled = true
+
+[cmd_duration]
+min_time = 1000
+format = " [$duration]($style)"
+style = "muted"

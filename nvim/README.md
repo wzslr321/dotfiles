@@ -1,5 +1,7 @@
-## My humble nvim config
+## Neovim config
 
-I use it to code mainly in Flutter, C++ & Rust.
+Lua config built on lazy.nvim. Entry point: `init.lua` → `lua/init.lua` (options, autocmds) → plugins, LSP, DAP, keymaps.
 
-It contains cool support for LaTeX, that's why instead of comprehensive readme, there is [PDF File](https://github.com/wzslr321/nvim-config/blob/main/main.pdf) which lists all the plugins and is my small personal cheatsheet for keybindings.
+Highlights: snacks.nvim (picker / explorer / terminal), blink.cmp, treesitter, conform format-on-save, and a custom Codex CLI integration (`lua/codex_agent.lua`) with inline visual review of AI edits.
+
+Keybinding reference: [KEYMAPS.md](KEYMAPS.md).

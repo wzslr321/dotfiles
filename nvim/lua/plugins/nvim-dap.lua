@@ -105,7 +105,6 @@ local get_device = function()
 
     vim.ui.select(vim.fn.split(output, '\n'), {
         prompt = "Select Device",
-        telescope = require 'telescope.themes'.get_cursor(),
     }, function(selected)
         coroutine.resume(co, selected)
     end

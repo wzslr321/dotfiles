@@ -1,133 +1,146 @@
 eval $(/opt/homebrew/bin/brew shellenv)
 
-
-# Retrieve private keys that can not be stored on github, e.g. GH Token
+# Private keys (not stored on github)
 if [ -f ~/.zshenv.local ]; then
     source ~/.zshenv.local
 fi
 
-export OLLAMA_DEBUG=1
+# --- PATH (deduplicated) ---
+export PATH="$HOME/.local/bin:$PATH"
 
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="/usr/local/texlive/2023/bin/universal-darwin:$PATH"
-export PATH="$PATH":"$HOME/.pub-cache/bin"
-export PATH="/usr/bin:$PATH"
-export PATH="/usr/local/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/fvm/default/bin:$PATH"
-export PATH="$HOME/textec:$PATH"
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-export PATH="$HOME/.dotnet:$PATH"
-export PATH="$PATH:/Users/creatix/.dotnet/tools"
-export DOTNET_ROOT="$HOME/.dotnet"
-export PATH=$JAVA_HOME/bin:$PATH
-export PATH="$ANDROID_HOME/platform-tools:$PATH"
-export ANDROID_HOME=~/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
-export PATH="$HOME/development/flutter/bin:$PATH"
+# LaTeX
 export PATH="/Library/TeX/texbin:$PATH"
-export PATH="$HOME/Library/Python/3.9/bin:$PATH"
-# export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
+
+# LLVM
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+# Java
 export JAVA_HOME=$(/usr/libexec/java_home -v17)
+export PATH="$JAVA_HOME/bin:$PATH"
 
-# University 
-# export JAVA_HOME="$HOME/Library/Java/JavaVirtualMachines/openjdk-24/Contents/Home"
-# export JAVA_HOME="$HOME/Library/Java/JavaVirtualMachines/corretto-1.8.0_432/Contents/Home"
+# Android
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$PATH"
 
+# Flutter / Dart (SDKs managed by fvm; consumed by nvim DAP config)
+export PATH="$HOME/fvm/default/bin:$PATH"
+export PATH="$HOME/.pub-cache/bin:$PATH"
+export FLUTTER_PATH="$HOME/fvm/default/bin/flutter"
+export DART_PATH="$HOME/fvm/default/bin/dart"
 
-export FLUTTER_PATH="$HOME/fvm/versions/3.27.3/bin/flutter"
-export DART_PATH="$HOME/fvm/versions/3.27.3/bin/dart"
+# .NET
+export DOTNET_ROOT="/usr/local/share/dotnet"
+export PATH="$DOTNET_ROOT:$DOTNET_ROOT/tools:$HOME/.dotnet/tools:$PATH"
 
+# Ruby (was duplicated 3x, now just once)
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - zsh)"
+
+# Python (Homebrew 3.14 via brew shellenv)
+
+# C++
+export LDFLAGS="-L/opt/homebrew/opt/llvm/lib/c++ -Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++"
+export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include"
+
+# --- Dotfiles ---
 export DOTFILES="$HOME/dotfiles"
 
-# C++ 
-export LDFLAGS="-L/opt/homebrew/opt/llvm/lib/c++ -Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++"
-export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
-export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include"
-#export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
-#export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
-
-# Zellij
+# --- Zellij ---
 export ZELLIJ_CONFIG_DIR="$DOTFILES/zellij/"
+source "$DOTFILES/zellij/.zellij.conf"
 
-source ~/dotfiles/zellij/.zellij.conf
-
+# --- Oh My Zsh (no theme — starship handles the prompt) ---
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="robbyrussell"
-
-plugins=(git)
-plugins+=(zsh-vi-mode)
-
+ZSH_THEME=""
+plugins=(git zsh-vi-mode)
 source $ZSH/oh-my-zsh.sh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Aliases
+# --- Terminal keys ---
+# Let zellij receive Ctrl-S instead of freezing terminal output with XOFF.
+[[ -t 0 ]] && stty -ixon -ixoff
+
+# --- Starship prompt ---
+export STARSHIP_CONFIG="$DOTFILES/starship.toml"
+[[ "$TERM" != "dumb" ]] && eval "$(starship init zsh)"
+
+# --- Modern CLI tools ---
+# Install: brew install eza bat fd zoxide delta
+alias ls="eza --icons"
+alias ll="eza -la --icons --git"
+alias lt="eza --tree --icons --level=2"
+alias cat="bat --paging=never"
+
+# --- Aliases ---
 alias b="cd .."
 alias bb="cd ../.."
 alias bbb="cd ../../.."
-alias cpt="cp $DOTFILES/nvim/templates/main.tex "
-alias cpr="rm src/main.rs && cp $DOTFILES/nvim/templates/rust-template.rs src/main.rs"
-alias cpc="cp $DOTFILES/nvim/templates/cpp-template.cpp main.cpp"
+alias c="clear"
+alias pip="pip3"
+alias python="python3"
+alias flutter="fvm flutter"
+
+# Codex TUI: keep Ghostty/native terminal scrollback usable.
+codex() {
+    case "$1" in
+        exec|e|review|login|logout|mcp|plugin|mcp-server|app-server|remote-control|app|completion|update|doctor|sandbox|debug|apply|a|archive|delete|unarchive|cloud|exec-server|features|help|-h|--help|-V|--version)
+            command codex "$@"
+            ;;
+        *)
+            command codex --no-alt-screen "$@"
+            ;;
+    esac
+}
+
+# C++ workflow
 alias cmp="rm -r out && mkdir out && g++ main.cpp --std=c++20 -o out/main"
 alias cmps="g++ main.cpp -fsanitize=undefined -o out/main --std=c++20"
 alias cr="./out/main"
-alias cmpa="as -o main.o main.s && /usr/bin/clang -o main main.o -e _start -arch arm64"
-alias cmpos="cargo +nightly run -Z build-std=core,compiler_builtins --target x86_64-blog_os.json build-std-features=compiler-builtins-mem"
-alias c="clear"
 alias cmpr="cmps && ./out/main"
+alias cmpa="as -o main.o main.s && /usr/bin/clang -o main main.o -e _start -arch arm64"
+
+# Flutter
 alias rundev="flutter run lib/main_dev.dart --target dev"
-alias lf="~/development/flutter/bin/flutter"
-alias ld="~/development/flutter/bin/dart"
-alias flutter="fvm flutter"
-alias pip="pip3"
-alias python="python3"
 
-# Haskell
-[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" 
+# --- Haskell ---
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
 
-# My lil program to make cd more convinient https://github.com/wzslr321/cdq
-cdq() {
-    local output=$(~/Remi/rust/cdq/target/debug/cdq $1)
-    echo $output
-     local dir=$(echo "$output" | sed -n 's/.*\.\///p')
-    if [ -d "$dir" ]; then
-        echo "Proceeding to the $dir"
-        cd "$dir"
-    fi
-}
-
-# Helpers
-nps() {
-    mkdir "$1" && cd "$1" && cpc && mkdir out
-}
-
-# Atuin | shell history
-# https://github.com/atuinsh/atuin
+# --- NVM ---
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
+# --- Atuin (shell history) ---
 . "$HOME/.atuin/bin/env"
-
 eval "$(atuin init zsh)"
+
+# --- Zoxide (smart cd, replaces cd) ---
+# Install: brew install zoxide
+eval "$(zoxide init zsh)"
+
+# --- Delta (better git diffs) ---
+# Configure in ~/.gitconfig:
+#   [core]
+#     pager = delta
+#   [interactive]
+#     diffFilter = delta --color-only
+#   [delta]
+#     navigate = true
+#     side-by-side = true
+
+# CocoaPods
+export LANG=en_US.UTF-8
+export PATH="$HOME/.gem/ruby/3.2.0/bin:$PATH"
+
+# Ollama
+export OLLAMA_DEBUG=1
 
 ## [Completion]
 ## Completion scripts setup. Remove the following line to uninstall
 [[ -f /Users/creatix/.dart-cli-completion/zsh-config.zsh ]] && . /Users/creatix/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
 
-export DOTNET_ROOT=/usr/local/share/dotnet
-# export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-# export PATH="$(ruby -r rubygems -e 'puts Gem.bindir'):$PATH"
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init - zsh)"
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init - zsh)"
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init - zsh)"
-
-# CocoaPods requires UTF-8 encoding
-export LANG=en_US.UTF-8
-
-# Add gem bin directory to PATH for CocoaPods
-export PATH="$HOME/.gem/ruby/3.2.0/bin:$PATH"
+# --- Machine-local / private shell config (gitignored) ---
+if [ -f "$DOTFILES/zsh/.zshrc.local" ]; then
+    source "$DOTFILES/zsh/.zshrc.local"
+fi
