@@ -1,17 +1,18 @@
-lazy-lock.json
+.DS_Store
 .idea/
 .config/
-lua/.luarc.json
+.ruff_cache/
+lazy-lock.json
+.luarc.json
+zsh/.zshrc.local
 
-# latex related
+# machine-local / private config overlays — never tracked
+nvim/lua/private/
+
+# LaTeX build artifacts
 **/*.aux
 **/*.fdb_latexmk
 **/*.fls
 **/*.log
 **/*.synctex.gz
 **/*.toc
-
-cheatsheet/
-templates/
-
-zsh/.zshrc.local
