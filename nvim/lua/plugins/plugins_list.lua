@@ -1,4 +1,4 @@
--- Plugin list — specs only. Any plugin whose config is more than a few
+-- Plugin list - specs only. Any plugin whose config is more than a few
 -- lines lives in its own file under lua/plugins/ (nvim-dap.lua is loaded
 -- separately from init.lua).
 return {

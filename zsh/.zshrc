@@ -49,7 +49,7 @@ export DOTFILES="$HOME/dotfiles"
 export ZELLIJ_CONFIG_DIR="$DOTFILES/zellij/"
 source "$DOTFILES/zellij/.zellij.conf"
 
-# --- Oh My Zsh (no theme — starship handles the prompt) ---
+# --- Oh My Zsh (no theme - starship handles the prompt) ---
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=""
 plugins=(git zsh-vi-mode)
@@ -111,8 +111,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # --- Atuin (shell history) ---
-. "$HOME/.atuin/bin/env"
-eval "$(atuin init zsh)"
+if [ -f "$HOME/.atuin/bin/env" ]; then
+    . "$HOME/.atuin/bin/env"
+fi
+command -v atuin >/dev/null && eval "$(atuin init zsh)"
 
 # --- Zoxide (smart cd, replaces cd) ---
 # Install: brew install zoxide

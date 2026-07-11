@@ -9,7 +9,7 @@ AI-Provenance:
 Personal keybinding reference, generated from the live config (2026-07).
 
 - **Leader** = `Space`
-- **Local leader** = `'` (apostrophe — used by LaTeX/vimtex)
+- **Local leader** = `'` (apostrophe - used by LaTeX/vimtex)
 - Text objects work after an operator (`d`, `c`, `y`, `v`). Below, `<leader>` = `Space`.
 
 ---
@@ -29,7 +29,7 @@ Personal keybinding reference, generated from the live config (2026-07).
 | `<leader>lg` | Lazygit |
 | `<leader>?` | Buffer-local keymaps (which-key popup) |
 
-## LSP — code intelligence
+## LSP - code intelligence
 
 Neovim 0.11 built-in defaults + a few custom maps.
 
@@ -50,7 +50,7 @@ Neovim 0.11 built-in defaults + a few custom maps.
 | `<leader>ih` | Toggle inlay hints (inline types & param names) |
 
 > Formatting also runs **on save**. Toggle with `:FormatDisable` / `:FormatEnable` (`:FormatDisable!` = current buffer only).
-> `gr` overlaps the `gr…` LSP prefix — after a brief `timeoutlen` pause `gr` opens Trouble; type `grr` quickly for the built-in.
+> `gr` overlaps the `gr…` LSP prefix - after a brief `timeoutlen` pause `gr` opens Trouble; type `grr` quickly for the built-in.
 
 ## Diagnostics
 
@@ -59,11 +59,11 @@ Neovim 0.11 built-in defaults + a few custom maps.
 | `]d` / `[d` | Next / prev diagnostic |
 | `<C-w>d` | Show diagnostics under cursor |
 | `<leader>gl` | Diagnostic float *(custom)* |
-| `<leader>xa` | Toggle diagnostics (workspace) — Trouble |
-| `<leader>xw` | Open diagnostics — Trouble |
-| `<leader>xd` | Buffer diagnostics — Trouble |
-| `<leader>xq` | Quickfix list — Trouble |
-| `<leader>xl` | Location list — Trouble |
+| `<leader>xa` | Toggle diagnostics (workspace) - Trouble |
+| `<leader>xw` | Open diagnostics - Trouble |
+| `<leader>xd` | Buffer diagnostics - Trouble |
+| `<leader>xq` | Quickfix list - Trouble |
+| `<leader>xl` | Location list - Trouble |
 
 ## Git
 
@@ -81,12 +81,12 @@ gitsigns (in-buffer) + diffview + lazygit. `git-messenger` is also installed for
 | `<leader>hd` | Diff this |
 | `<leader>htb` | Toggle inline line-blame |
 | `<leader>htd` | Toggle deleted |
-| `<leader>gd` | Diffview — review full working-tree diff |
-| `<leader>gD` | Diffview — current file only |
-| `<leader>gq` | Diffview — close review |
+| `<leader>gd` | Diffview - review full working-tree diff |
+| `<leader>gD` | Diffview - current file only |
+| `<leader>gq` | Diffview - close review |
 | `<leader>lg` | Lazygit (full TUI) |
 
-## Treesitter — selection & movement
+## Treesitter - selection & movement
 
 | Key | Action |
 |-----|--------|
@@ -101,8 +101,8 @@ mini.ai (treesitter-powered) + built-ins.
 
 | Object | Meaning |
 |--------|---------|
-| `af` / `if` | Function — outer / inner |
-| `ac` / `ic` | Class — outer / inner |
+| `af` / `if` | Function - outer / inner |
+| `ac` / `ic` | Class - outer / inner |
 | `aa` / `ia` | Argument / parameter |
 | `a)` `a]` `a}` `a"` `a'` `` a` `` | Brackets / quotes (use `i` for inner) |
 | `at` / `it` | Tag (HTML/XML) |
@@ -113,15 +113,15 @@ mini.ai (treesitter-powered) + built-ins.
 
 | Key | Action |
 |-----|--------|
-| `gc` / `gcc` | Toggle comment — motion / current line |
+| `gc` / `gcc` | Toggle comment - motion / current line |
 | `sa` | Add surrounding (`saiw)` or visual `sa)`) |
 | `sd` | Delete surrounding |
 | `sr` | Replace surrounding |
-| `sf` / `sF` | Find surrounding — right / left |
+| `sf` / `sF` | Find surrounding - right / left |
 | `sh` | Highlight surrounding |
-| — | `(` `[` `{` `"` `'` `` ` `` auto-close (mini.pairs) |
+| - | `(` `[` `{` `"` `'` `` ` `` auto-close (mini.pairs) |
 
-## Completion — blink.cmp (insert mode, `super-tab` preset)
+## Completion - blink.cmp (insert mode, `super-tab` preset)
 
 | Key | Action |
 |-----|--------|
@@ -134,7 +134,7 @@ mini.ai (treesitter-powered) + built-ins.
 
 > Ghost text previews the top match inline; function signature help pops up while typing call arguments.
 
-## Debugging — DAP
+## Debugging - DAP
 
 | Key | Action |
 |-----|--------|
@@ -156,19 +156,19 @@ mini.ai (treesitter-powered) + built-ins.
 | `<leader>ri` / `<leader>rj` | Horizontal resize + / − |
 | `<C-w>h/j/k/l` *(in terminal)* | Leave terminal → move to window |
 | `<Esc>` *(in terminal)* | Exit terminal mode |
-| `<leader>dd` | Detour — open current buffer in a float |
+| `<leader>dd` | Detour - open current buffer in a float |
 
 ## Codex (`lua/codex_agent.lua`)
 
 | Key | Action |
 |-----|--------|
-| `<leader>a?` | Action menu — normal mode; in visual mode includes the selection |
+| `<leader>a?` | Action menu - normal mode; in visual mode includes the selection |
 | `<leader>ac` | Open / focus Codex terminal |
 | `<leader>ar` | Resume last Codex session (`codex resume --last`) |
 | `<leader>ab` | Send current buffer path to Codex |
 | `<leader>as` *(visual)* | Ask Codex about selection (starts inline visual review) |
 | `<leader>av` | `codex review` |
-| `<leader>aa` | `codex apply` — apply latest Codex diff |
+| `<leader>aa` | `codex apply` - apply latest Codex diff |
 | `<leader>ad` | Review Codex/git changes (Diffview) |
 
 **Inline visual review** (active after `<leader>as`; refreshes on focus-gain):
@@ -182,7 +182,7 @@ mini.ai (treesitter-powered) + built-ins.
 
 **Inside the Codex terminal:** `<C-s>` scroll mode · `q` back to input · `<C-g>` focus reviewed file.
 
-## LaTeX — vimtex (local leader `'`)
+## LaTeX - vimtex (local leader `'`)
 
 | Key | Action |
 |-----|--------|

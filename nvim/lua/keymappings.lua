@@ -43,7 +43,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
             map("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "Hover docs" }))
         end
 
-        -- inlay hints (inline types & param names) — deterministic LSP info, not AI
+        -- inlay hints (inline types & param names) - deterministic LSP info, not AI
         if client and client:supports_method("textDocument/inlayHint") then
             vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
             map("n", "<space>ih", function()

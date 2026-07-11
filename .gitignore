@@ -6,7 +6,7 @@ lazy-lock.json
 .luarc.json
 zsh/.zshrc.local
 
-# machine-local / private config overlays — never tracked
+# machine-local / private config overlays - never tracked
 nvim/lua/private/
 
 # LaTeX build artifacts
