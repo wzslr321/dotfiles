@@ -45,9 +45,17 @@ export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include"
 # --- Dotfiles ---
 export DOTFILES="$HOME/dotfiles"
 
-# --- Zellij ---
+# --- Zellij fallback ---
+# Kept during the cmux trial so existing sessions and `zas` remain available.
 export ZELLIJ_CONFIG_DIR="$DOTFILES/zellij/"
 source "$DOTFILES/zellij/.zellij.conf"
+
+# --- Paseo ---
+# The desktop app bundles its CLI. Keep it available without a global symlink.
+PASEO_BIN_DIR="/Applications/Paseo.app/Contents/Resources/bin"
+if [ -d "$PASEO_BIN_DIR" ]; then
+    export PATH="$PASEO_BIN_DIR:$PATH"
+fi
 
 # --- Oh My Zsh (no theme - starship handles the prompt) ---
 export ZSH="$HOME/.oh-my-zsh"
@@ -80,14 +88,23 @@ alias pip="pip3"
 alias python="python3"
 alias flutter="fvm flutter"
 
-# Codex TUI: keep Ghostty/native terminal scrollback usable.
+# Codex TUI: keep native terminal scrollback usable. Inside cmux, use its
+# per-session wrapper for notifications and session restore without installing
+# global hooks that would also run in Ghostty.
 codex() {
+    local runner=(command codex)
+    local cmux_codex_wrapper="/Applications/cmux.app/Contents/Resources/bin/cmux-codex-wrapper"
+
+    if [[ -n "$CMUX_SURFACE_ID" && -x "$cmux_codex_wrapper" ]]; then
+        runner=("$cmux_codex_wrapper")
+    fi
+
     case "$1" in
         exec|e|review|login|logout|mcp|plugin|mcp-server|app-server|remote-control|app|completion|update|doctor|sandbox|debug|apply|a|archive|delete|unarchive|cloud|exec-server|features|help|-h|--help|-V|--version)
-            command codex "$@"
+            "${runner[@]}" "$@"
             ;;
         *)
-            command codex --no-alt-screen "$@"
+            "${runner[@]}" --no-alt-screen "$@"
             ;;
     esac
 }

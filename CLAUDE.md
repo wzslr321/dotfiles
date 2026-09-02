@@ -13,6 +13,7 @@ Docs style: plain human voice, never use em dashes (they read as AI-generated); 
 - **nvim/** - Neovim config (Lua-based, lazy.nvim plugin manager); keybinding reference in `nvim/KEYMAPS.md`
 - **zsh/.zshrc** - Zsh shell config (Oh My Zsh, Starship prompt, modern CLI tools)
 - **zellij/** - Zellij terminal workspace (KDL config + `zas` session-picker helper)
+- **cmux/cmux.json** - cmux workspace settings and familiar Ghostty/Zellij keybindings
 - **ghostty/config** - Ghostty terminal settings
 - **starship.toml** - Starship prompt config (loaded via `STARSHIP_CONFIG` in .zshrc)
 - **lazygit/config.yml** - Lazygit TUI config
@@ -40,7 +41,7 @@ After changing keymaps, update `nvim/KEYMAPS.md` to match.
 
 ## Zsh Configuration
 
-`zsh/.zshrc` initializes Homebrew first, then sets up PATH for Flutter/Dart (via fvm), LLVM, Java, Android, Ruby, .NET, etc. Uses zsh-vi-mode plugin and Starship (`STARSHIP_CONFIG` points into this repo). Modern CLI aliases: eza→ls, bat→cat, zoxide→cd, atuin→history. A `codex()` wrapper adds `--no-alt-screen` to interactive Codex TUI invocations. Zellij is attached manually via the `zas` helper (no auto-attach).
+`zsh/.zshrc` initializes Homebrew first, then sets up PATH for Flutter/Dart (via fvm), LLVM, Java, Android, Ruby, .NET, etc. Uses zsh-vi-mode plugin and Starship (`STARSHIP_CONFIG` points into this repo). Modern CLI aliases: eza→ls, bat→cat, zoxide→cd, atuin→history. A `codex()` wrapper adds `--no-alt-screen` to interactive Codex TUI invocations and uses cmux's per-session wrapper when `CMUX_SURFACE_ID` is present. Paseo's bundled CLI is added to PATH when Paseo.app exists. Zellij is retained as a fallback and attached manually via `zas` (no auto-attach).
 
 Private hooks (both gitignored): `~/.zshenv.local` (secrets, sourced first) and `zsh/.zshrc.local` (machine-local shell config, sourced last).
 
