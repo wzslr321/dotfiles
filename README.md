@@ -21,6 +21,7 @@ Screenshots: drop PNGs into assets/ and uncomment.
 | `zsh/.zshrc` | Zsh | Shell config: PATH setup, aliases, plugins ([Oh My Zsh](https://ohmyz.sh), zsh-vi-mode) |
 | `ghostty/config` | [Ghostty](https://ghostty.org) | Terminal emulator settings (font, theme, keybinds) |
 | `zellij/` | [Zellij](https://zellij.dev) | Terminal multiplexer: tabs, panes and detachable sessions inside one terminal window. `zas` is a small helper that lists sessions and attaches to the one you pick |
+| `cmux/cmux.json` | [cmux](https://cmux.com) | Trial terminal workspace: native workspaces, panes, agent notifications and browser surfaces. It reuses `ghostty/config` for terminal rendering |
 | `starship.toml` | [Starship](https://starship.rs) | Shell prompt (git status, language versions, command duration) |
 | `lazygit/config.yml` | [Lazygit](https://github.com/jesseduffield/lazygit) | Terminal UI for git |
 
@@ -47,6 +48,8 @@ git clone https://github.com/wzslr321/dotfiles.git ~/dotfiles
 ln -s ~/dotfiles/zsh/.zshrc ~/.zshrc
 ln -s ~/dotfiles/nvim ~/.config/nvim
 ln -s ~/dotfiles/ghostty/config ~/Library/'Application Support'/com.mitchellh.ghostty/config
+mkdir -p ~/.config/cmux
+ln -s ~/dotfiles/cmux/cmux.json ~/.config/cmux/cmux.json
 ```
 
 Zellij, Starship and the rest need no linking; `.zshrc` points them at the repo through `ZELLIJ_CONFIG_DIR` and `STARSHIP_CONFIG`.
@@ -57,7 +60,11 @@ The tools themselves come from Homebrew:
 brew install neovim zellij starship lazygit eza bat zoxide atuin git-delta
 ```
 
-Neovim installs its plugins automatically on first start.
+Neovim installs its plugins automatically on first start. cmux and Paseo are
+currently an optional trial stack: cmux replaces the Ghostty + Zellij UI while
+keeping both available as a fallback, and Paseo manages agent sessions across
+desktop, mobile and CLI. When Paseo.app is installed, its bundled CLI is added
+to `PATH` automatically.
 
 ## Private config
 
